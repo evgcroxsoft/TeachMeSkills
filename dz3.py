@@ -23,7 +23,7 @@
 import random
 number = random.randint(1,100)
 while True:
-    shout = input('Угадай мое число?:')
+    shout = input('Guess my number:')
 #"Выдает ошибку и перезапускает ввод, если введена буква"
     if shout.isalpha():
         print('Invalid, please write only numbers')
@@ -38,12 +38,12 @@ while True:
         print('Yeahhhhhhh')
         break
     elif shout <= (number + 5) and shout >= (number - 5):
-        print('Ryadom do 5')  
+        print('Approximately 5')  
     elif shout <= ((number + 6 and number +10)) and shout >= ((number - 6 and number - 10)):
-        print('Ryadom do 10')  
+        print('Approximately 10')  
     elif shout <= ((number + 11 and number +20)) and shout >= ((number - 11 and number - 20)):
-        print('Ryadom do 20')
+        print('Approximately 20')
     elif shout <= ((number + 21 and number +30)) and shout >= ((number - 21 and number - 30)):
-        print('Ryadom do 30')
+        print('Approximately 30')
     else:
-        print('Daleko, poprobuy esho')
+        print('Far, try again')
