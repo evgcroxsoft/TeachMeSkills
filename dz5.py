@@ -55,7 +55,7 @@ person = [
     
 ]
 
-def guest_list():
+def guest_list(person):
     '''
     Функция принимает в себя список гостей, отдает нам общее количество гостей,
     количество и список мужчин,
@@ -67,7 +67,7 @@ def guest_list():
     total = (f'Total = {len(gen)},\nMan = {len(men)}:{men},\nWoman = {len(women)}{women}')
     return total
 
-print(guest_list())
+print(guest_list(person))
 
 
 
