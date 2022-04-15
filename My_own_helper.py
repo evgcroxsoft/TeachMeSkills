@@ -5,10 +5,17 @@ dictionary = {'name' : 'Dmitriy', 'gender' : 'M'}
 set = {1,2,3,2,2,1,1,2,2,}
 float = 1.25
 tuple = ('Sunday','Monday','Tuesday','Wednesday')
+tuple_2 = ({'name': 'Fedor', 'surname': 'Ivanov', 'gender': 'M'})
 list = [string,integer,boolean, dictionary, set,float,tuple]
 
 string, integer, boolean = 'Zhenya', 25, False 
 ''' Можно писать переменные в одну строку'''
+
+for key in tuple_2:
+    print (key,':',tuple_2[key])
+for value in tuple_2.items():
+    print(value)
+
 
 a = dictionary['name']
 b = list[0]
