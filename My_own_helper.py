@@ -58,3 +58,35 @@ k = iter(s)
 print(next(k))
 print(next(k))
 print(next(k))
+
+# Regex - ищем в тексте что нам нужно
+import re
+target_string = "My name is Evgeniy I am 36"
+world_list = re.split(r"\s+",target_string)
+print(world_list)
+
+regex = r"([a-zA-Z]+) (\d+)"
+
+match = re.search(regex,"I was born on June 24")
+if match != None:
+    print(f"Match at index: {match.start()},{match.end()}")
+    print("Full Match: %s" % (match.group(0)))
+    print(f"Month: {match.group(1)}")
+    print("Day: %s" % (match.group(2)))
+
+#Regex 2 - меняем в тексте что нам нужно
+
+pattern = '\s+'
+replace = ''
+string = 'Z h e n y a'
+new_string = re.sub(pattern,replace,string)
+print(new_string)
+
+# Regex 3 - проверка емейла
+value = input('Enter you email: ')
+pattern = r"^[a-zA-Z0-9!s%&'*+\-\/=?^_`{|}~]+@[a-zA-Z0-9_]+\.{1}[a-zA-Z0-9_]{,63}$" 
+print(f'Lenght:{len(value)}')
+if re.fullmatch(pattern,value):
+    print ('Match')
+else:
+    print('No Match')
