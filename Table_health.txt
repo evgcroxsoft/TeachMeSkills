@@ -1,0 +1,9 @@
+CREATE TABLE table_health(
+    id INTEGER PRIMARY KEY,
+    health TEXT NOT NULL
+);
+
+
+INSERT INTO table_health(health) VALUES ('Healthy');
+INSERT INTO table_health(health) VALUES ('Recover');
+INSERT INTO table_health(health) VALUES ('Injured');

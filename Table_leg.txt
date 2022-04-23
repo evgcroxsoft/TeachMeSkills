@@ -1,0 +1,9 @@
+CREATE TABLE table_leg(
+    id INTEGER PRIMARY KEY,
+    leg TEXT NOT NULL
+);
+
+
+INSERT INTO leg(leg) VALUES ('Right');
+INSERT INTO leg(leg) VALUES ('Left');
+INSERT INTO leg(leg) VALUES ('Both');

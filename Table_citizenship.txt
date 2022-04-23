@@ -1,0 +1,14 @@
+CREATE TABLE table_citizenship(
+    id INTEGER PRIMARY KEY,
+    citizenship TEXT NOT NULL
+);
+
+
+INSERT INTO table_citizenship(citizenship) VALUES ('France');
+INSERT INTO table_citizenship(citizenship) VALUES ('Poland');
+INSERT INTO table_citizenship(citizenship) VALUES ('Germany');
+INSERT INTO table_citizenship(citizenship) VALUES ('Greece');
+INSERT INTO table_citizenship(citizenship) VALUES ('Netherlands');
+INSERT INTO table_citizenship(citizenship) VALUES ('Spain');
+INSERT INTO table_citizenship(citizenship) VALUES ('Belgium');
+
