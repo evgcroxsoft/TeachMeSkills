@@ -1,0 +1,7 @@
+{
+    //name, surname, age, position
+    "name": "Ivan",
+    "surname": "Petrov",
+    "age": "30",
+    "position": "teacher"
+}
