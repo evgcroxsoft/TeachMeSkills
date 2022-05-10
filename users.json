@@ -1,7 +1,26 @@
-{
-    //name, surname, age, position
-    "name": "Ivan",
+[
+    {
+    "name": "Oleg",
     "surname": "Petrov",
     "age": "30",
     "position": "teacher"
-}
+    },
+    {
+    "name": "Alex",
+    "surname": "Petrov",
+    "age": "27",
+    "position": "teacher"
+    },
+    {
+        "name": "Alex",
+        "surname": "Petrov",
+        "age": "27",
+        "position": "teacher"
+    },
+    {
+        "name": "Maria",
+        "surname": "Petrov",
+        "age": "27",
+        "position": "teacher"
+    }
+]
