@@ -13,7 +13,7 @@ class Child:
 class Parent(Child):
     def __init__(self, education, married_status, **kwargs):
         self.education = education,
-        self.maried_status = married_status,
+        self.married_status = married_status,
         super().__init__(**kwargs)
 
     def lenght (self):
