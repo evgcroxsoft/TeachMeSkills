@@ -14,8 +14,7 @@ class Player:
         self.surname = surname
         self.country = country
         self.mood = mood
-        Player.TOTAL_PLAYERS = Player.TOTAL_PLAYERS+1
-
+        Player.TOTAL_PLAYERS = Player.TOTAL_PLAYERS + 1
 
     @property
     def name_surname(self):
@@ -33,7 +32,6 @@ class Player:
             return True
         else: 
             return False
-
 
     @staticmethod
     def say_hello(self):
