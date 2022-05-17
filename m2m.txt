@@ -1,0 +1,51 @@
+CREATE TABLE teachers(
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    surname TEXT NOT NULL,
+    age INTEGER NOT NULL
+);
+
+INSERT INTO teachers(name, surname, age) VALUES ('Alex','Fedorov','42');
+INSERT INTO teachers(name, surname, age) VALUES ('Nikol','Begra','56');
+INSERT INTO teachers(name, surname, age) VALUES ('Cristianu','Ronaldu','25');
+INSERT INTO teachers(name, surname, age) VALUES ('Pietr','Leduk','34');
+INSERT INTO teachers(name, surname, age) VALUES ('Ali','Ziksi','67');
+
+
+CREATE TABLE subjects(
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+INSERT INTO subjects(name) VALUES ('Maths');
+INSERT INTO subjects(name) VALUES ('ESL');
+INSERT INTO subjects(name) VALUES ('Speaking club');
+INSERT INTO subjects(name) VALUES ('Phylosofy');
+
+CREATE TABLE teachers_subjects(
+    id INTEGER PRIMARY KEY,
+    teach_id INTEGER NOT NULL,
+    subj_id INTEGER NOT NULL,
+    FOREIGN KEY (teach_id) REFERENCES teachers(id),
+    FOREIGN KEY (subj_id) REFERENCES subjects(id)
+);
+
+INSERT INTO teachers_subjects(teach_id,subj_id) VALUES (1,2);
+INSERT INTO teachers_subjects(teach_id,subj_id) VALUES (2,2);
+INSERT INTO teachers_subjects(teach_id,subj_id) VALUES (3,1);
+INSERT INTO teachers_subjects(teach_id,subj_id) VALUES (4,3);
+INSERT INTO teachers_subjects(teach_id,subj_id) VALUES (5,4);
+INSERT INTO teachers_subjects(teach_id,subj_id) VALUES (1,4);
+
+
+SELECT 
+teachers.name, teachers.surname, teachers.age, subjects.name 
+FROM 
+teachers_subjects 
+JOIN 
+teachers, 
+subjects 
+ON
+teachers_subjects.teach_id == teachers.id
+AND 
+teachers_subjects.subj_id == subjects.id;

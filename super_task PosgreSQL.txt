@@ -1,0 +1,70 @@
+CREATE TABLE authors
+(
+    id SERIAL PRIMARY KEY,
+    name CHARACTER VARYING(30),
+    surname CHARACTER VARYING(30),
+    age INTEGER
+);
+
+INSERT INTO authors (name,surname,age) VALUES('Alex','Grolovka','35');
+INSERT INTO authors (name,surname,age) VALUES('Oleg','Lenza','27');
+INSERT INTO authors (name,surname,age) VALUES('Stepan','Burovec','67');
+
+CREATE TABLE books
+(
+    id SERIAL PRIMARY KEY,
+    name CHARACTER VARYING(30),
+    authors_id INTEGER,
+    FOREIGN KEY (authors_id) REFERENCES authors(id)
+);
+
+
+INSERT INTO books (name,authors_id) VALUES('Who live in this house?',2);
+INSERT INTO books (name,authors_id) VALUES('Stories',3);
+INSERT INTO books (name,authors_id) VALUES('Winners',1);
+INSERT INTO books (name,authors_id) VALUES('Who live in this house - 2?',2);
+INSERT INTO books (name,authors_id) VALUES('Who live in this house - 3?',2);
+INSERT INTO books (name,authors_id) VALUES('Who live in this house - 4?',2);
+INSERT INTO books (name,authors_id) VALUES('Winners-2',1);
+INSERT INTO books (name,authors_id) VALUES('Winners-3',1);
+INSERT INTO books (name,authors_id) VALUES('Winners-4',1);
+INSERT INTO books (name,authors_id) VALUES('Winners-5',1);
+INSERT INTO books (name,authors_id) VALUES('Winners-6',1);
+INSERT INTO books (name,authors_id) VALUES('Winners-7',1);
+INSERT INTO books (name,authors_id) VALUES('Who live in this house - 5?',2);
+INSERT INTO books (name,authors_id) VALUES('Who live in this house - 6?',2);
+INSERT INTO books (name,authors_id) VALUES('Who live in this house - 7?',2);
+INSERT INTO books (name,authors_id) VALUES('Who live in this house - 8?',2);
+INSERT INTO books (name,authors_id) VALUES('Who live in this house - 9?',2);
+INSERT INTO books (name,authors_id) VALUES('Stories-2',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-3',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-4',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-5',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-6',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-7',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-8',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-9',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-10',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-11',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-12',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-13',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-14',3);
+INSERT INTO books (name,authors_id) VALUES('Stories-15',3);
+
+
+# Выводим данные автора у которого больше всего книг вариант 1
+SELECT authors.name, authors.surname, authors.age, COUNT(books.authors_id) AS books
+FROM books JOIN authors
+ON books.authors_id = authors.id
+GROUP BY authors.name, authors.surname, authors.age
+ORDER BY books desc
+LIMIT 1;
+
+# Выводим данные автора у которого больше всего книг вариант 2
+
+SELECT authors.name, authors.surname, authors.age, COUNT(books.authors_id)
+FROM authors LEFT OUTER JOIN books 
+ON authors.id = books.authors_id
+GROUP BY authors.name, authors.surname, authors.age, books.authors_id
+ORDER BY books.authors_id desc
+LIMIT 1;

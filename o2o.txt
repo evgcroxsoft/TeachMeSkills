@@ -1,0 +1,26 @@
+CREATE TABLE car(
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    owner TEXT NOT NULL,
+    garage_id INTEGER UNIQUE NOT NULL,
+    FOREIGN KEY (garage_id ) REFERENCES garage(id)
+);
+
+INSERT INTO car (name, owner,garage_id) VALUES ('Ferrari','John',1);
+INSERT INTO car (name, owner,garage_id) VALUES ('Buggatti','Frederik',2);
+
+# Эта запись уже не пройдет! Покажет, что такая привязка уже есть;
+INSERT INTO car (name, owner,garage_id) VALUES ('Porsh','Alex',1);
+
+
+CREATE TABLE garage(
+    id INTEGER PRIMARY KEY,
+    number INTEGER NOT NULL
+);
+
+INSERT INTO garage (number) VALUES ('10');
+INSERT INTO garage (number) VALUES ('20');
+INSERT INTO garage (number) VALUES ('30');
+INSERT INTO garage (number) VALUES ('40');
+
+
