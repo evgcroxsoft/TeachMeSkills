@@ -1,9 +1,9 @@
 # 1. сделать класс. 2. Сделать класс наследник 3. Переопределить метод родителя  4. *Перегрузить метод __init__
 
 class Child:
-    def __init__(self, name: str, surname: str, born):
-        self.name = name,
-        self.surname = surname,
+    def __init__(self, name: str, surname: str, born: str):
+        self.name = name
+        self.surname = surname
         self.born = born
     
     def lenght (self):
@@ -12,12 +12,12 @@ class Child:
 
 class Parent(Child):
     def __init__(self, education, married_status, **kwargs):
-        self.education = education,
-        self.married_status = married_status,
+        self.education = education
+        self.married_status = married_status
         super().__init__(**kwargs)
 
-    def lenght (self):
-        return (f'Переопределили метод родителя: {len(str(self.surname))}')
+    def get_name_lenght(self):
+        return f'Переопределили метод родителя: {len(str(self.surname))}'
     
     def __str__(self):
         return f'This is my new name {self.name}'
@@ -40,6 +40,6 @@ adult = Parent(
 
 
 print(alex.name, alex.surname, alex.born, alex.lenght())
-print(f"{alex.name}, {adult.name},'He has education: {adult.education}", adult.lenght())
+print(f"{alex.name}, {adult.name},'He has education: {adult.education}", adult.get_name_lenght())
 print(Parent.mro())
 print(str(adult))
