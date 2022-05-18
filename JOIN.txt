@@ -1,0 +1,38 @@
+CREATE TABLE helpdesk(
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    task_id INTEGER,
+    FOREIGN KEY (task_id) REFERENCES tasks(id)
+);
+
+INSERT INTO helpdesk (name, task_id) VALUES ('Alex',1);
+INSERT INTO helpdesk (name, task_id) VALUES ('John',2);
+INSERT INTO helpdesk (name, task_id) VALUES ('Pieter',3);
+INSERT INTO helpdesk (name, task_id) VALUES ('Olga',1);
+INSERT INTO helpdesk (name, task_id) VALUES ('Oleg',2);
+INSERT INTO helpdesk (name, task_id) VALUES ('Vasya',2);
+INSERT INTO helpdesk (name) VALUES ('TEST');
+
+
+CREATE TABLE tasks(
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+INSERT INTO tasks(name) VALUES ('Install Windows driver');
+INSERT INTO tasks(name) VALUES ('Set up Microsoft SERVER');
+INSERT INTO tasks(name) VALUES ('Delete programm');
+INSERT INTO tasks(name) VALUES ('Reboot system');
+
+
+SELECT 
+helpdesk.name, 
+tasks.name 
+FROM 
+helpdesk LEFT OUTER JOIN tasks ON helpdesk.task_id == tasks.id;
+
+SELECT 
+helpdesk.name, 
+tasks.name 
+FROM 
+tasks RIGHT OUTER JOIN tasks ON task.id == helpdesk.id;
