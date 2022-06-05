@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Events {% endblock %}</h1>
+    <form class="container-fluid justify-content-start">
+      <a class="btn btn-primary" href="{{ url_for('create_event') }}" role="button">Create Event</a>
+    </form>
+      <br>
+          <table class="table table-striped">
+            <thead>
+              <tr class="align-left">
+                <th scope="col">Date</th>
+                <th scope="col">Event</th>
+                <th scope="col">Created</th>
+                <th scope="col">Place</th>
+                <th scope="col">Description</th>
+                <th scope="col">URL</th>
+                <th scope="col">Join</th>
+              </tr>
+            </thead>
+          </table>
+              {% for event in events_table %}
+              <table class="table table-striped">  
+              <tbody>
+
+              <tr class="align-left" > 
+                <td>{{ event.date }} </td> 
+                <td>{{ event.name }}</td>
+                <td>{{ event.date_added }}</td>
+                <td>{{ event.place }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.url }}</td>
+                <td><button type="button" onclick="alert('{{ event.id }}')">ID</button></td>
+              </tr>
+              </table>
+            </tbody>
+          </table>
+        </div>   
+    {% endfor %}
+
+{% endblock %}

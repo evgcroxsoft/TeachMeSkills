@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} User registration {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <h4>Enter Login and password:</h4>
+                <label for="email">Email:</label>
+                <input type="email" name="email" required
+                        placeholder="alex@gmail.com">
+
+  
+                <label for="pass">Password:</label>
+                <input type="password" name="password"
+                       minlength="8" required
+                       placeholder="W_1klomx">
+
+                <label for="pass"> Repeat Password:</label>
+                <input type="password" name="repeat_password"
+                       minlength="8" required
+                       placeholder="repeat_password">
+        </p>
+        <br>
+        <label style= "color:#ec1c0d">{{message}}</label>
+        <hr>
+        <h4>Enter your data:</h4>
+        <p>          
+                <label for="name">Name</label>
+                <input type="text" name="name"
+                   placeholder="Oleg">
+            </input>
+        
+      
+            <label for="surname">Surname</label>
+            <input type="text" name="surname"
+                   placeholder="Vitkovskii">
+            </input>
+        </p>
+        <p>
+            <label for="birthday">Birthday</label>
+            <input type="date" name="birthday" ></input>
+      
+            <label for="address">Address</label>
+            <input type="text" name="address"
+                   placeholder="Spain, Madrid, Boulivard street, 27">
+            </input>
+        </p>
+        <p> 
+            <input type="Submit" value="Sign in">
+        </p>
+        <br>
+        <a href='/login'<br> <i>Log in</i></a>
+    </form>
+{% endblock %}

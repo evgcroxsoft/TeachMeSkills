@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Events {% endblock %}</h1>
+    <a href="/create_event"><button>Create Event</button></a>
+
+    {% for event in events_table %}
+        <div class='event'>
+            <h6><i><p>Added {{ event.date_added }}</p></i></h6> Event<h3>{{ event.name }} 
+                {{ event.date }} <br> {{ event.place }}</h3>
+            <i><p>{{ event.url }} </p></i>
+            <p class='description'>{{ event.description }}</p>
+            <button type="button" onclick="alert('{{ event.description }}')">Descriprion</button><br><br>
+        </div>
+        
+    {% endfor %}
+
+{% endblock %}

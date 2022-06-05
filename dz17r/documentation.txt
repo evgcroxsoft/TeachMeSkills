@@ -1,0 +1,8 @@
+CREATE DATABASE flask_db;
+CREATE USER zhenya WITH PASSWORD '`b{5:P3kUv5LdJF.';
+GRANT ALL PRIVILEGES ON DATABASE flask_db TO zhenya;
+sudo -iu postgres psql
+source dz17r/.env
+
+
+pip install flask-login

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} User {% endblock %}</h1>
+    {% for user in users_table %}
+        <div class='event'>
+            <h6><i><p>Added {{ user.hash }}</p></i></h6> {{ user.date_added }}<h3>{{ user.name }} 
+                {{ user.surname}} <br> {{ user.email }}</h3>
+            <i><p>{{ user.address }} </p></i>
+            <p class='description'>{{ user.birthday}}</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}

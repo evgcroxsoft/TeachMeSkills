@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% block content %}
+{{ super() }}
+<h2>{% block title %} Home {% endblock %}</h2>
+<br>
+{% for cat, msg in get_flashed_messages(true) %}
+    <div>
+    {% endfor %}
+    {% for registered in Register %}
+        <div class='event'>
+            <h6><i><p>Added {{ registered.date_added }}</p></i></h6> Users<h3>{{ registered.email }} 
+                {{ registered.password }}</h3>
+
+        </div>
+        
+    {% endfor %}
+
+{% endblock %}

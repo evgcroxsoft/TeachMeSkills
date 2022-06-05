@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block content %}
+{{ super() }}
+<h2>{% block title %} Login in {% endblock %}</h2>
+<br>
+{% for cat, msg in get_flashed_messages(true) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<form action="/login" method="post" class="form-contact"
+<p><label>Email:</label><input type="email" name="form_email" value="" placeholder="example@gmail.com" required</p>
+<p><label>Password:</label><input type="password" name="form_password" value="" placeholder="A_we2as0" required</p>
+<p><input type="checkbox" name="rememberme"> Remember me
+<p><input type="submit" value="Login in">
+<hr align=left width="300px">
+<p><a href="{{url_for('register')}}">Create account</a> <a href="{{url_for('forget_password')}}">Forget password?</a>
+</form>
+{% endblock%}

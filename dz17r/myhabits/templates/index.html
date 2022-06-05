@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}- MyHabits</title>
+    <style>
+        nav a {
+            color: #42d7be;
+            font-size: 1em;
+            margin-left: 50px;
+            text-decoration: none;
+        }
+
+        .login {
+            
+            color: #42d7be;
+        }
+
+        .event {
+            
+            padding: 5px;
+            margin: 5px;
+            background-color: #f7f4f4;
+        }
+
+        .decription {
+                margin-left: 500px;
+                font-size: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('home') }}">Home</a
+        
+    </nav>
+    <hr>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>

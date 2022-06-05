@@ -1,0 +1,47 @@
+<!-- Страница создания мероприятия-->
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Event registration {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="name">Name of event</label>
+            <input type="text" name="name"
+                   placeholder="event name">
+            </input>
+        </p>
+
+        <p>
+            <label for="date">Event date</label>
+            <input type="date" name="date"
+                   placeholder="Date">
+            </input>
+        </p>
+
+        <p>
+            <label for="place">Event place</label>
+            <input type="text" name="place"
+                   placeholder="Event address">
+            </input>
+        </p>
+
+        <p>
+            <label for="url">Event link</label>
+            <input type="text" name="url"
+                   placeholder="https//dropbox.com/myimage.jpg">
+            </input>
+        </p>
+        <p>
+        <label for="description">Description</label>
+        <br>
+        <textarea name="description"
+                  placeholder="Please write a few words about your Event"
+                  rows="5"
+                  cols="60"
+                  ></textarea>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{% endblock %}
