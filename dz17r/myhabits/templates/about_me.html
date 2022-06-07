@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% block content %}
+{{ super() }}
+<h2>{% block title %} About me: {{current_user.nickname}} {% endblock %}</h2>
+<br>
+{% for cat, msg in get_flashed_messages(true) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<form action="/profile/about_me" method="post" enctype="multipart/form-data""
+<p><label>Nickname: </label><input type="text" name="nickname" value="" placeholder="{{current_user.nickname}}"</p>
+<p><label>Name: </label><input type="text" name="name" value="" placeholder="Platon" </p>
+<p><label>Surname: </label><input type="text" name="surname" value="" placeholder="Kachan" </p>
+<p><label>Birthday: </label><input type="date" name="birthday" value="{current_user.birthday}" placeholder="{current_user.birthday}" required></p>
+<p><label>Telegram: </label><input type="tel" name="telegram" value="" placeholder="+380731541616 or @Leon" </p>
+<p><label>Colour: </label><input type="color" name="colour" value="" required</p></br>
+<p><label>Avatar: </label><input type ="file" enctype="multipart/form-data" name="avatar" value="" </p></br>
+
+    <p><label>Choose your gender:</label></p>
+    <input type="radio" id="boy" name="gender" value="boy">
+    <label for="boy">boy</label><br>
+    <input type="radio" id="girl" name="gender" value="girl">
+    <label for="girl">girl</label><br>
+    <input type="radio" id="none" name="gender" value="none" checked>
+    <label for="none">none</label><br>
+
+<p><label for="my_info">Description</label><br><textarea name="my_info"              placeholder="Please write a few words about you"
+              rows="5"
+              cols="30"
+              ></textarea>
+    </p>
+<p><input type="submit" value="Save"><p>
+</form>
+{% endblock%}

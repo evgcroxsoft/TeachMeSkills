@@ -12,7 +12,7 @@ def change_password(id):
     user_check = Register.query.get(id)
     if id == user_check.id:
         limit_link = int(session_check())
-        if limit_link < 2:
+        if limit_link < 3:
             if request.method == 'POST':
                 form_password = request.form['form-password']
                 form_password_2 = request.form['form-password_2']

@@ -9,6 +9,7 @@ from send_email import send_email
 @app.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
+        form_nickname = request.form['nickname']
         form_email = request.form['form_email']
         form_password = request.form['password']
         form_password_2 = request.form['password_2']
@@ -43,6 +44,7 @@ def register():
         hashed = generate_password_hash(form_password)
 
         user = Register(
+                        nickname=form_nickname,
                         email=form_email, 
                         password=hashed
                         )

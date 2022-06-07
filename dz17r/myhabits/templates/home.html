@@ -7,9 +7,11 @@
     <div>
     {% endfor %}
     {% for registered in Register %}
+
         <div class='event'>
             <h6><i><p>Added {{ registered.date_added }}</p></i></h6> Users<h3>{{ registered.email }} 
                 {{ registered.password }}</h3>
+                <h1>{{name}}</h1>
 
         </div>
         

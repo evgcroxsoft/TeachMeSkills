@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% block content %}
+{{ super() }}
+<h2>{% block title %} Profile {{current_user.nickname}} {% endblock %}</h2>
+<br>
+<p><a href="{{url_for('about_me')}}">About me</a> 
+<p><label>{{current_user.birthday}}</label></p>
+{% for cat, msg in get_flashed_messages(true) %}    
+{% endfor %}
+    <body style="background-color:{{current_user.colour}}"></body>
+{% endblock %}
