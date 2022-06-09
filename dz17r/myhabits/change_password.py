@@ -17,7 +17,7 @@ def change_password(id):
                 form_password = request.form['form-password']
                 form_password_2 = request.form['form-password_2']
                 print('Hello World')
-                regex_password = r'^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$'
+                regex_password = r"^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
 
                 if form_password != form_password_2:
                     flash('Different passwords', category = 'error')
@@ -27,7 +27,7 @@ def change_password(id):
                     flash('Password less then 8 digits', category = 'error')
                     return redirect(url_for('change_password', id=user_check.id))
                 
-                if re.findall(regex_password, form_password) == None:
+                if re.fullmatch(regex_password, form_password) == None:
                     flash('Password no Match!', category = 'error')
                     return redirect(url_for('change_password', id=user_check.id))
                     

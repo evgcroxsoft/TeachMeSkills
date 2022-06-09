@@ -1,0 +1,29 @@
+body {
+    background-color: "{{current_user.colour}}";
+
+}
+
+        nav a {
+            color: #42d7be;
+            font-size: 1em;
+            margin-left: 50px;
+            text-decoration: none;
+        }
+
+        .login {
+            
+            color: #42d7be;
+        }
+
+        .event {
+            
+            padding: 5px;
+            margin: 5px;
+            background-color: #f7f4f4;
+        }
+
+        .decription {
+                margin-left: 500px;
+                font-size: 10px;
+        }
+
