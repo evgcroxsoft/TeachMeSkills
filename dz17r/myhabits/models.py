@@ -38,6 +38,7 @@ class Habit(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     name = db.Column(db.String(150), unique=False, nullable=True)
     description = db.Column(db.Text, unique=False, nullable=True)
+    register_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
     created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
 
 class Log(db.Model):

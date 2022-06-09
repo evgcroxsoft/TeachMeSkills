@@ -59,7 +59,8 @@ def habits():
         form_description = request.form['form_description']
         habit = Habit(
                         name=form_name,
-                        description=form_description, 
+                        description=form_description,
+                        register_id=current_user.id 
                         )
         try:
             db.session.add(habit)

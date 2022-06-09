@@ -37,7 +37,7 @@
               </button> </a></br>
 
 
-              {% if current_user.email == 'admin@admin.com'%}
+              {% if current_user.email == 'admin@admin.com' or current_user.id == row.register_id%}
               <a href="/profile/habits/edit/{{row.name}}/{{row.id}}" type="button" id={{row.id}} method="delete" class="button">Edit</a> 
               /  
               <a href="/profile/habits/delete/{{row.name}}/{{row.id}}" type="button" id={{row.id}} method="delete" class="button">Delete</a>
