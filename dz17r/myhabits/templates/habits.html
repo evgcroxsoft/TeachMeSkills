@@ -1,8 +1,17 @@
 {% extends "index.html" %}
 {% block content %}
 {{ super() }}
-<h2>{% block title %} Create Habits: {{current_user.nickname}} {% endblock %}</h2>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+        <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Habits</li>
+    </ol>
+    <hr>
+  </nav>
+<h2>{% block title %} Habits{% endblock %}</h2>
 <br>
+
 {% for cat, msg in get_flashed_messages(true) %}
 <div class="flash {{cat}}">{{msg}}</div>
 {% endfor %}
@@ -13,12 +22,10 @@
 
     
 <form action="/profile/habits" method="post" enctype="multipart/form-data"
+<label><h3>Fill in the gaps to create a new Habit</h3></label>
 <p><label>Habit name: </label><input type="text" name="form_name" value="" placeholder="Brush my teath" required
 <p> Description: </label><input type="Description" name="form_description" value="" placeholder="Please write a few words why is this habit important?" required</p> 
 <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Save Habit"><p>
-
-
-    
 </div>
 </form>
 <table class="table table-bordered table-dark" table-layout="fixed" width="10%">
@@ -32,7 +39,7 @@
         <td class="table-light" table-layout="auto" > {{ cell }} </td> 
         {% endfor %}
         <td class="table-light">
-            <a href="/profile/habits/create_new_task/{{row.name}}/{{row.id}}" button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            <a href="/profile/habits/tasks/create/{{row.name}}/{{row.id}}" button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
                 Create Task 
               </button> </a></br>
 
@@ -43,10 +50,6 @@
               <a href="/profile/habits/delete/{{row.name}}/{{row.id}}" type="button" id={{row.id}} method="delete" class="button">Delete</a>
           
               {% endif %}
-
-
-
-
     </tr>
     {% endfor %}
 </table>

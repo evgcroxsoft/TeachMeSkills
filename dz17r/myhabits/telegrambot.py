@@ -2,6 +2,8 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import os
+from __init__ import db
+from models import Task, Habit
 
 from flask_login import current_user
 
@@ -11,19 +13,19 @@ from models import Register
 
 @dp.message_handler()
 async def echo_send(message : types.message):
-    form_email = message.text
+    nickname = message.text
     try:
-        check_user = Register.query.filter_by(email=form_email).first()
+        check_user = Register.query.filter_by(nickname=nickname).first()
+        tasks = db.session.query(Task, Habit).join(Habit).all()
+    
+        for task, habit in tasks:
+            name = habit.name
+            description = habit.description
+            wish = task.wish_period
+            start = task.start_period
 
-        list = (check_user.nickname,
-                check_user.name,
-                check_user.surname,
-                check_user.colour,
-                check_user.telegram
-                )
-
-        if message.text == form_email:
-            await message.answer(f'Hi: {list}!')
+        if message.text == nickname:
+            await message.answer(f'Hi: {name, description, wish, start, check_user.email}!')
     except:
         await message.answer('Sorry, nothing in database!')
     # await bot.send_message(message.from_user.id, 'Hello world')

@@ -1,6 +1,13 @@
 {% extends "index.html" %}
 {% block content %}
 {{ super() }}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Register</li>
+    </ol>
+  </nav>
+  <hr>
 <h2>{% block title %} Register {% endblock %}</h2>
 <br>
 {% for cat, msg in get_flashed_messages(true) %}

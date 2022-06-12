@@ -3,34 +3,67 @@
 <head>
 
     <meta charset="UTF-8">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='style/style.css') }}">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>{% block title %} {% endblock %}- MyHabits</title>
 </head>
 <body>
-    <nav>
-        <a href="{{ url_for('home') }}">Home</a>
-        {% if current_user.is_authenticated %}
-        <a href="{{ url_for('profile') }}">Profile</a>
-        {% endif %}
-        {% if not current_user.is_authenticated %}
-        <a href="{{ url_for('login') }}">Login</a>
 
-    {% endif %}
-    {% if current_user.is_authenticated %}
-    <a href="{{ url_for('logout') }}">Logout</a>
-
-    {% endif %}
-
-    </nav>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="background-color: #83e7ee;">
+        <a class="navbar-brand navbar-collapse collapse w-100 " href="/home">MyHabits</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav navbar-collapse collapse w-100">
+            {% if not current_user.is_authenticated %}
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</span></a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('register') }}">Register</span></a>
+            </li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('profile') }}"><b>{{current_user.nickname}}</b></span></a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('about_me') }}">AboutMe</span></a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('habits') }}">Habits</span></a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('tasks') }}">Tasks</span></a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{{ url_for('profile') }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Profile
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ url_for('about_me') }}">About_me</a>
+                <a class="dropdown-item" href="{{ url_for('habits') }}">Habits</a>
+                <a class="dropdown-item" href="{{ url_for('tasks') }}">Tasks</a>
+              </div>
+            </li> -->
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
     <hr>
     <div class="content">
         {% block content %} {% endblock %}
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script>
-        $(function () {
-    $('habits_name').selectpicker();
-});
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 </body>
 </html>

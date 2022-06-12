@@ -1,11 +1,16 @@
 {% extends "index.html" %}
 {% block content %}
 {{ super() }}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Profile</li>
+    </ol>
+    <hr>
+  </nav>
 <h2>{% block title %} Profile {{current_user.nickname}} {% endblock %}</h2>
 <br>
-<p><a href="{{url_for('about_me')}}">About me</a> 
-<p><a href="{{url_for('habits')}}">Habits</a> 
-
+{{task}}
 
 
 {% for cat, msg in get_flashed_messages(true) %}    

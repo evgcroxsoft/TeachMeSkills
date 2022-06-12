@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block content %}
+{{ super() }}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+      <li class="breadcrumb-item"><a href="/profile/habits">Habits</a></li>
+      <li class="breadcrumb-item"><a href="/profile/habits/tasks">Tasks</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Edit Task</li>
+    </ol>
+    <hr>
+  </nav>
+<h2>{% block title %} Edit Task {% endblock %}</h2>
+<br>
+{% for cat, msg in get_flashed_messages(true) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+
+<div class="container">
+<form method="post" enctype="multipart/form-data">
+    <h2>{{name}}: </h2> <h4>{{description}} </h4>
+    <p><b><label>Start date: </label> <input type="date" name="start_period" value="{{start}}" required>
+<br><br><label for="quantity">Wish period, days: </label></b>
+    <input type="number" id="quantity" name="wish_period" value="{{wish}}" min="14" max="30"><br>    
+</div>
+
+<form class="" aria-required="true" method="post"
+    <p><b><label>Choose in what days your habit will work: </label></b><br>
+    <input type="checkbox"  id="weekday-mon" name="weekday-mon"class="weekday" value="Monday" checked/>
+    <input type="hidden"  id="weekday-mon" name="weekday-mon"class="weekday" value="off"/>
+    <label for="weekday-mon">Monday</label>
+    <input type="checkbox" id="weekday-tue" name="weekday-tue" class="weekday" value="Tusday" checked/>
+    <input type="hidden"  id="weekday-tue" name="weekday-tue"class="weekday" value="off"/>
+    <label for="weekday-tue">Tusday</label>
+    <input type="checkbox" id="weekday-wed" name="weekday-wed" class="weekday" value="Wednesday" checked/>
+    <input type="hidden"  id="weekday-wed" name="weekday-wed"class="weekday" value="off"/>
+    <label for="weekday-wed">Wednesday</label>
+    <input type="checkbox" id="weekday-thu" name="weekday-thu" class="weekday" value="Thursday" checked/>
+    <input type="hidden"  id="weekday-thu" name="weekday-thu"class="weekday" value="off"/>
+    <label for="weekday-thu">Thursday</label>
+    <input type="checkbox" id="weekday-fri" name="weekday-fri" class="weekday" value="Friday" checked/>
+    <input type="hidden"  id="weekday-fri" name="weekday-fri"class="weekday" value="off"/>
+    <label for="weekday-fri">Friday</label>
+    <input type="checkbox" id="weekday-sat" name="weekday-sat" class="weekday"  value="Saturday" checked/>
+    <input type="hidden"  id="weekday-sat" name="weekday-sat"class="weekday" value="off"/>
+    <label for="weekday-sat">Saturday</label>
+    <input type="checkbox" id="weekday-sun" name="weekday-sun" class="weekday" value="Sunday" checked/>
+    <input type="hidden"  id="weekday-sun" name="weekday-sun"class="weekday" value="off"/>
+    <label for="weekday-sun">Sunday</label>
+
+
+
+  <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Save task"><p>
+   
+</div>
+</form>
+</div>
+
+{% endblock%}
