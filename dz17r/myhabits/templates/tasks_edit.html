@@ -20,7 +20,7 @@
 <div class="container">
 <form method="post" enctype="multipart/form-data">
     <h2>{{name}}: </h2> <h4>{{description}} </h4>
-    <p><b><label>Start date: </label> <input type="date" name="start_period" value="{{start}}" required>
+    <p><b><label>Start date: </label> <input type="date" name="start_period" value="{{start}}" value="" min="{{today}}" required>
 <br><br><label for="quantity">Wish period, days: </label></b>
     <input type="number" id="quantity" name="wish_period" value="{{wish}}" min="14" max="30"><br>    
 </div>
@@ -30,9 +30,9 @@
     <input type="checkbox"  id="weekday-mon" name="weekday-mon"class="weekday" value="Monday" checked/>
     <input type="hidden"  id="weekday-mon" name="weekday-mon"class="weekday" value="off"/>
     <label for="weekday-mon">Monday</label>
-    <input type="checkbox" id="weekday-tue" name="weekday-tue" class="weekday" value="Tusday" checked/>
+    <input type="checkbox" id="weekday-tue" name="weekday-tue" class="weekday" value="Tuesday" checked/>
     <input type="hidden"  id="weekday-tue" name="weekday-tue"class="weekday" value="off"/>
-    <label for="weekday-tue">Tusday</label>
+    <label for="weekday-tue">Tuesday</label>
     <input type="checkbox" id="weekday-wed" name="weekday-wed" class="weekday" value="Wednesday" checked/>
     <input type="hidden"  id="weekday-wed" name="weekday-wed"class="weekday" value="off"/>
     <label for="weekday-wed">Wednesday</label>

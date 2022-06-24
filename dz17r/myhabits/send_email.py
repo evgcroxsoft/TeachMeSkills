@@ -19,17 +19,6 @@ app.config['MAIL_ASCII_ATACHMENTS'] = False
 
 mail = Mail(app)
 
-# @app.route('/email')
-# def e_mail():
-#     list = ['lalalend4321@gmail.com', 'pangenya321@icloud.com']
-#     for i in list:
-#         msg = Message('My habits online')
-#         print(i)
-#         msg.recipients = [f'{i}']
-#         msg.body = 'Hello, I am an automatic system'
-#         mail.send(msg)
-#     return 'Message has been sent!'
-
 def send_email(form_email):
     msg = Message('MyHabits')
     msg.recipients = [f'{form_email}']

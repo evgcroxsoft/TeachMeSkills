@@ -4,7 +4,6 @@ from flask import session
 
 app.permanent_session_lifetime = datetime.timedelta(hours=1)
 
-
 def session_check():
     session.permanent = True
     if 'visits' in session:

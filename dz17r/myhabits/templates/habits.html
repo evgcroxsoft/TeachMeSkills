@@ -30,24 +30,24 @@
 </form>
 <table class="table table-bordered table-dark" table-layout="fixed" width="10%">
     <tr class="table__header"></tr>
-        {% for header in "№", "Habit name", "Description", "Created", "Action"%}
+        {% for header in "№", "Habit name", "Description", "Created", "Nickname", "Action"%}
         <th class="table-success">{{header}}</th>
         {% endfor %}
-        {% for row in data %}
+        {% for habit, register in data %}
     <tr class="table__row"></tr>
-        {% for cell in loop.index, row.name, row.description, row.created %}
+        {% for cell in loop.index, habit.name, habit.description, habit.created, register.nickname %}
         <td class="table-light" table-layout="auto" > {{ cell }} </td> 
         {% endfor %}
         <td class="table-light">
-            <a href="/profile/habits/tasks/create/{{row.name}}/{{row.id}}" button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+            <a href="/profile/habits/tasks/create/{{habit.name}}/{{habit.id}}" button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
                 Create Task 
               </button> </a></br>
 
 
-              {% if current_user.email == 'admin@admin.com' or current_user.id == row.register_id%}
-              <a href="/profile/habits/edit/{{row.name}}/{{row.id}}" type="button" id={{row.id}} method="delete" class="button">Edit</a> 
+              {% if current_user.email == 'admin@admin.com' or current_user.id == habit.register_id%}
+              <a href="/profile/habits/edit/{{habit.name}}/{{habit.id}}" type="button" id={{habit.id}} method="delete" class="button">Edit</a> 
               /  
-              <a href="/profile/habits/delete/{{row.name}}/{{row.id}}" type="button" id={{row.id}} method="delete" class="button">Delete</a>
+              <a href="/profile/habits/delete/{{habit.name}}/{{habit.id}}" type="button" id={{habit.id}} method="delete" class="button">Delete</a>
           
               {% endif %}
     </tr>

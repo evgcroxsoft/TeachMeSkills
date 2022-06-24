@@ -27,21 +27,21 @@ class Habit(db.Model):
     register_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
     created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
 
-class Log(db.Model):
-    id = db.Column(db.Integer, unique=True, primary_key=True)
-    decription = db.Column(db.String(200), unique=False, nullable=True)
-    created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
-    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
+# class Log(db.Model):
+#     id = db.Column(db.Integer, unique=True, primary_key=True)
+#     decription = db.Column(db.String(200), unique=False, nullable=True)
+#     created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+#     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
 
 # class Status(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     name = db.Column(db.String(10), unique=False, nullable=True)
 
-class Relative(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    child_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
-    adult_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
-    created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+# class Relative(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     child_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
+#     adult_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
+#     created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
 
 class Task(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
@@ -49,13 +49,19 @@ class Task(db.Model):
     start_period = db.Column(db.Date, unique=False, nullable=True)
     pause_period = db.Column(db.Date, unique=False, nullable=True)
     weekdays = db.Column(db.PickleType, unique=False, nullable=True)
+    life = db.Column(db.Integer, unique=False, default=3, nullable=True)
+    total_lifes = db.Column(db.Integer, unique=False, default=3, nullable=True)
+    remain = db.Column(db.Integer, unique=False, default=0, nullable=True)
     habit_id = db.Column(db.Integer, db.ForeignKey(Habit.id), nullable=False)
     register_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
     created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
 
-class Date(db.Model):
+class Statistic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date, unique=False, nullable=True)
-    habit_id = db.Column(db.Integer, db.ForeignKey(Habit.id), nullable=False)
+    weekdays = db.Column(db.String(10), unique=False, nullable=True)
+    life = db.Column(db.Integer, unique=False, default=1, nullable=True)
+    status = db.Column(db.String(10), unique=False, nullable=True)
+    task_id = db.Column(db.Integer, db.ForeignKey(Habit.id), nullable=False)
+    register_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
     created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
 

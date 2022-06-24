@@ -52,8 +52,8 @@ def register():
 
         try:
             db.session.add(user)
-            db.session.commit()
             send_email(form_email)
+            db.session.commit()
             return redirect(url_for('login'))
         except:
             flash('Some problem with registration, please try again!')

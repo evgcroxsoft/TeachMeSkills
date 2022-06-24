@@ -8,13 +8,36 @@
     </ol>
     <hr>
   </nav>
-<h2>{% block title %} Profile {{current_user.nickname}} {% endblock %}</h2>
+<h2>{% block title %} Profile {{current_user.nickname}} / TODO {{total_habits_for_today}} tasks {% endblock %}</h2>
 <br>
-{{task}}
 
-
-{% for cat, msg in get_flashed_messages(true) %}    
+<div class="container">
+  {% if total_habits_for_today == 0 %}
+  <img src="{{url_for('static', filename='makvin.jpg')}}" class="center-block"  alt="Responsive image">
+  <h2>You are cool! You have not any task for today.</h2>
+  {% endif %}
+{% for cat, msg in get_flashed_messages(true) %}
+<div class="flash {{cat}}">{{msg}}</div>    
 {% endfor %}
-
+<form method="post" enctype="multipart/form-data"
     <body style="background-color:{{current_user.colour}}"></body>
+    
+    {%for task, habit in today_tasks %}
+    <div class="form-check">
+      <input class="form-check-input:" type="checkbox" value="{{task.id}}" id="" name="result">
+      <!-- <input class="form-check-input:" type="hidden"  value="{{task.id}}" id="" name="result"> -->
+      <label class="form-check-label" for="{{task.id}}">
+        <h4> {{loop.index}}. {{habit.name}}</h4> </label>
+        <br><h6>{{habit.description}}</h6>
+    </div>
+    <div class="progress"> 
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="10" aria-valuemin="1" aria-valuemax="100" style="width: {{100/task.wish_period*task.remain}}%">{{task.remain}} days from {{task.wish_period}}</div>
+    </div>
+  <hr>
+    {% endfor %}
+    {% if total_habits_for_today != 0 %}
+    <input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Save results"><p>
+    {% endif %}
+  </div>
+</form>
 {% endblock %}

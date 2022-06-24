@@ -1,10 +1,10 @@
-from calendar import weekday
 from __init__ import app, db
-from models import Register, Habit, Task
+from models import Register, Habit, Task, Statistic
 from flask_login import current_user, login_required,  logout_user
 from flask import flash, redirect, render_template, request, url_for
-from datetime import datetime
-import datetime
+from datetime import datetime, date
+import datetime 
+from sqlalchemy import func
 
 @app.route('/')
 def index():
@@ -20,18 +20,6 @@ def logout():
     logout_user()
     flash('You exit from account')
     return redirect(url_for('login'))
-
-@app.route('/profile')
-@login_required
-def profile():
-    tasks = db.session.query(Task, Habit).join(Habit).all()
-    date_now = datetime.date.today()
-    for task, habit in tasks:
-        print(type(task.start_period), type(date_now))
-        if task.start_period >= date_now:
-            task = f'{habit.name}'
-
-    return render_template('profile.html', task = task)
 
 @app.route('/profile/about_me', methods=('GET','POST'))
 @login_required
@@ -76,10 +64,8 @@ def habits():
         except:
             flash('Some problem with registration, please try again!')
             return render_template('habits.html')
-    habit_check = Habit.query.all()
-
+    habit_check = db.session.query(Habit, Register).join(Register).order_by(Habit.created.desc()).all()
     return render_template('habits.html', data=habit_check)
-
 
 @app.route('/profile/habits/delete/<name>/<id>', methods=('GET','POST','DELETE'))
 @login_required
@@ -116,13 +102,14 @@ def habits_edit(name,id):
 @app.route('/profile/habits/tasks', methods=('GET','POST'))
 @login_required
 def tasks():
-    tasks = db.session.query(Task, Habit).join(Habit).all()
+    tasks = db.session.query(Task, Habit).join(Habit).order_by(Task.created.desc()).all()
     return render_template('tasks.html', tasks=tasks)
 
 @app.route('/profile/habits/tasks/create/<name>/<id>', methods=('GET','POST'))
 @login_required
-def tasks_create(name,id):
+def tasks_create(name ,id):
     habit = Habit.query.get(id)
+    date_now = datetime.date.today()
     if request.method == 'POST':
         wish_period = request.form['wish_period']
         start_period = request.form['start_period']
@@ -152,7 +139,7 @@ def tasks_create(name,id):
         except:
             flash('Some problem with editing, please try again!')
             return render_template('tasks.html')
-    return render_template('tasks_create.html', habit=habit, today = datetime.date.today())
+    return render_template('tasks_create.html', habit=habit, today = date_now)
 
 @app.route('/profile/habits/tasks/delete/<name>/<id>', methods=('GET','POST','DELETE'))
 @login_required
@@ -172,6 +159,7 @@ def tasks_delete(name,id):
 @app.route('/profile/habits/tasks/edit/<name>/<id>', methods=('GET','POST'))
 @login_required
 def tasks_edit(name,id):
+    date_now = datetime.date.today()
     task_check = Task.query.get(id)
     tasks = db.session.query(Task, Habit).join(Habit).all()
     
@@ -182,7 +170,6 @@ def tasks_edit(name,id):
         start = task.start_period
 
     if request.method == 'POST'and current_user.id == task_check.register_id or current_user.email == 'admin@admin.com':
-
         weekdays = (request.form['weekday-mon'],
                     request.form['weekday-tue'],
                     request.form['weekday-wed'],
@@ -204,4 +191,4 @@ def tasks_edit(name,id):
             flash('Some problem with editing, please try again!')
             return render_template('tasks.html')
         
-    return render_template('tasks_edit.html', name=name, description=description, wish=wish, start=start)
+    return render_template('tasks_edit.html', name=name, description=description, wish=wish, start=start, today = date_now)
