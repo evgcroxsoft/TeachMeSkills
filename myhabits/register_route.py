@@ -52,7 +52,7 @@ def register():
 
         try:
             db.session.add(user)
-            send_email(form_email)
+            #send_email(form_email)
             db.session.commit()
             return redirect(url_for('login'))
         except:

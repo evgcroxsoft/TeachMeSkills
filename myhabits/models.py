@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
+import datetime
 from __init__ import db
 from datetime import datetime
 
@@ -18,14 +19,16 @@ class Register(db.Model, UserMixin):
     avatar = db.Column(db.LargeBinary, unique=False, nullable=True)
     gender = db.Column(db.String(10), unique=False, nullable=True)
     my_info = db.Column(db.Text, unique=False, nullable=True)
-    created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+    #created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+    created = db.Column(db.Date, default=datetime.date.today())
 
 class Habit(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     name = db.Column(db.String(150), unique=False, nullable=True)
     description = db.Column(db.Text, unique=False, nullable=True)
     register_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
-    created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+    #created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+    created = db.Column(db.Date, default=datetime.date.today())
 
 # class Log(db.Model):
 #     id = db.Column(db.Integer, unique=True, primary_key=True)
@@ -54,7 +57,8 @@ class Task(db.Model):
     remain = db.Column(db.Integer, unique=False, default=0, nullable=True)
     habit_id = db.Column(db.Integer, db.ForeignKey(Habit.id), nullable=False)
     register_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
-    created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+    #created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+    created = db.Column(db.Date, default=datetime.date.today())
 
 class Statistic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -63,5 +67,6 @@ class Statistic(db.Model):
     status = db.Column(db.String(10), unique=False, nullable=True)
     task_id = db.Column(db.Integer, db.ForeignKey(Task.id), nullable=False)
     register_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
-    created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+    #created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
+    created = db.Column(db.Date, default=datetime.date.today())
 

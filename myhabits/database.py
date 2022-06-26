@@ -27,4 +27,4 @@ class DataBase():
         db.create_all()
         print('Shiny!')
 
-# DataBase.resetdb_command()
+DataBase.resetdb_command()
