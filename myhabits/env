@@ -1,0 +1,10 @@
+export POSTGRES_URL=127.0.0.1:5432
+export POSTGRES_USER=zhenya
+export POSTGRES_PW='`b{5:P3kUv5LdJF.'
+export POSTGRES_DB=flask_db
+export FLASK_DEBUG=1
+export FLASK_APP=app.py
+export MAIL_SERVER=mail.adm.tools
+export MAIL_USERNAME=myhabits@***.com
+export MAIL_PASSWORD='*********'
+export TOKEN=5577527484:**********
