@@ -54,7 +54,7 @@ def profile():
             try:
                 db.session.commit()
             except:
-                # db.session.rollback()
+                db.session.rollback()
                 flash('Some problem with Save results, please try again!')
                 return render_template('profile.html')
         return redirect(url_for('profile'))

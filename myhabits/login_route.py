@@ -21,7 +21,6 @@ def login():
             return render_template('login.html')
 
         if check_password_hash(check_user.password, form_password):
-            # userlogin = UserLogin().create(check_user)
             login_user(check_user, remember=remember)
             return redirect(url_for('profile'))
         else: 
