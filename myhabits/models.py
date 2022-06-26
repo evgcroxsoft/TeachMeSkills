@@ -61,7 +61,7 @@ class Statistic(db.Model):
     weekdays = db.Column(db.String(10), unique=False, nullable=True)
     life = db.Column(db.Integer, unique=False, default=1, nullable=True)
     status = db.Column(db.String(10), unique=False, nullable=True)
-    task_id = db.Column(db.Integer, db.ForeignKey(Habit.id), nullable=False)
+    task_id = db.Column(db.Integer, db.ForeignKey(Task.id), nullable=False)
     register_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Register.id), nullable=False)
     created = db.Column(db.Date, default=datetime.now().strftime("%d-%m-%Y"))
 

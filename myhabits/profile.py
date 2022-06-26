@@ -35,12 +35,13 @@ def profile():
                                     register_id = current_user.id,
                                     status = 'in process'
                                     )
+                            print(static,task.id, current_user.id)
                             try:
                                 db.session.add(statistic_data)
                                 db.session.commit()
                             except:
-                                flash('Some problem with update, please try again!')      
-
+                                flash('Some problem with update!!!, please try again!')
+                                db.session.rollback()   
     today_tasks = db.session.query(Task, Habit).filter(Task.id.in_(ids)).join(Habit).all()
     if request.method == 'POST':
         data = request.form
@@ -53,6 +54,7 @@ def profile():
             try:
                 db.session.commit()
             except:
+                # db.session.rollback()
                 flash('Some problem with Save results, please try again!')
                 return render_template('profile.html')
         return redirect(url_for('profile'))
