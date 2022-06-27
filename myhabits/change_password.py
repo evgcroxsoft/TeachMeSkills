@@ -1,45 +1,41 @@
-from flask import Flask, request, flash, redirect, url_for, render_template
-import __init__
-from __init__ import db, app
-from models import Register
-from werkzeug.security import generate_password_hash
 import re
+from flask import flash, redirect, render_template, request, url_for
+from __init__ import db, app
+from models import User
 from send_email import send_email
 from session_check import session_check
+from werkzeug.security import generate_password_hash
 
 @app.route('/change_password/<uuid:id>', methods=('GET', 'POST'))
 def change_password(id):
-    user_check = Register.query.get(id)
+    user_check = User.query.get(id)
     if id == user_check.id:
         limit_link = int(session_check())
         if limit_link < 3:
             if request.method == 'POST':
-                form_password = request.form['form-password']
-                form_password_2 = request.form['form-password_2']
-                print('Hello World')
+                confirmed_password = request.form['form-password']
+                confirmed_password_2 = request.form['form-password_2']
                 regex_password = r"^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
 
-                if form_password != form_password_2:
-                    flash('Different passwords', category = 'error')
+                if confirmed_password != confirmed_password_2:
+                    flash('Passwords do not match', category = 'error')
                     return redirect(url_for('change_password', id=user_check.id))
                 
-                if len(form_password) < 8:
-                    flash('Password less then 8 digits', category = 'error')
+                if len(confirmed_password) < 8:
+                    flash('Password should have more than 8 characters', category='error')
                     return redirect(url_for('change_password', id=user_check.id))
                 
-                if re.fullmatch(regex_password, form_password) == None:
-                    flash('Password no Match!', category = 'error')
+                if re.fullmatch(regex_password, confirmed_password) == None:
+                    flash('Password no Match!', category='error')
                     return redirect(url_for('change_password', id=user_check.id))
                     
-                hashed = generate_password_hash(form_password)
-
-                new_password = hashed
-                user_check.password = new_password
+                hashed_password = generate_password_hash(confirmed_password)
+                user_check.password = hashed_password
                 try:
                     db.session.commit()
                     send_email(user_check.email)
                     return redirect(url_for('login'))
-                except:
+                except Exception:
                     flash('Some problem with registration, please try again!')
                     return render_template('change_password.html')
         else:

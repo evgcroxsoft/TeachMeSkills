@@ -1,16 +1,15 @@
-from __init__ import app, db
-from flask_login import current_user, login_required
-from models import Task, Habit, Statistic
-from datetime import datetime, date
-import datetime
+from datetime import datetime
 from flask import flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required
 from sqlalchemy.sql import func
+from __init__ import app, db
+from models import Task, Habit, Statistic
 
 
 @app.route('/profile', methods=('GET','POST'))
 @login_required
 def profile():
-    tasks = db.session.query(Task, Habit).filter_by(register_id = current_user.id).join(Habit).all()
+    tasks = db.session.query(Task, Habit).filter_by(register_id=current_user.id).join(Habit).all()
     date_now = datetime.date.today()
     weekday_now = datetime.datetime.today().strftime('%A')
     ids = []

@@ -1,18 +1,8 @@
-from models import Register
+from sqlalchemy_utils import create_database, database_exists, drop_database
 from __init__ import DB_path, db
-from sqlalchemy_utils import database_exists, create_database, drop_database
+from models import User
 
-class DataBase():
-    def getUser(self,user_id):
-        '''Get Id from User for authentication'''
-        try:
-            res = Register.query.get(user_id)
-            if not res:
-                print('User not found')
-                return False
-        except Exception:
-            print ('Troubles to take data from DB')
-
+class Database():
     def resetdb_command():
         '''Destroys and creates the database + tables.'''
         
@@ -27,4 +17,4 @@ class DataBase():
         db.create_all()
         print('Shiny!')
 
-# DataBase.resetdb_command()
+# Database.resetdb_command()

@@ -9,13 +9,13 @@ from flask_login import current_user
 
 bot = Bot(os.getenv('TOKEN'))
 dp = Dispatcher(bot)
-from models import Register
+from models import User
 
 @dp.message_handler()
 async def echo_send(message : types.message):
     nickname = message.text
     try:
-        check_user = Register.query.filter_by(nickname=nickname).first()
+        check_user = User.query.filter_by(nickname=nickname).first()
         tasks = db.session.query(Task, Habit).join(Habit).all()
     
         for task, habit in tasks:

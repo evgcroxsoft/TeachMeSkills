@@ -1,58 +1,57 @@
-from flask import Flask, request, flash, redirect, url_for, render_template
-import __init__
-from __init__ import db, app
-from models import Register
-from werkzeug.security import generate_password_hash
+from flask import request, flash, redirect, url_for, render_template
 import re
 from send_email import send_email
+from werkzeug.security import generate_password_hash
+from __init__ import db, app
+from models import User
 
 @app.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
         '''https://regex101.com/r/qmTzU0/2/'''
-        form_nickname = request.form['nickname']
-        form_email = request.form['form_email']
-        form_password = request.form['password']
-        form_password_2 = request.form['password_2']
+        nickname = request.form['nickname']
+        email = request.form['form_email']
+        password = request.form['password']
+        password_2 = request.form['password_2']
 
-        user_check = Register.query.filter_by(email=form_email).first()
+        user = User.query.filter_by(email=email).first()
         regex_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' 
 
-        if user_check:
-            if form_email == user_check.email:
-                flash('Such Email already exists', category = 'error')
+        if user:
+            if email == user.email:
+                flash('Such Email already exists', category='error')
                 return redirect(url_for('register'))
         
-        if re.fullmatch(regex_email, form_email) == None:
-            flash('Email no match!', category = 'error')
+        if re.fullmatch(regex_email, email) == None:
+            flash('Email no match!', category='error')
             return redirect(url_for('register'))
 
         regex_password = r"^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
 
 
-        if form_password != form_password_2:
-            flash('Different passwords', category = 'error')
+        if password != password_2:
+            flash('Passwords do not match', category = 'error')
             return redirect(url_for('register'))
         
-        if len(form_password) < 8:
-            flash('Password less then 8 digits', category = 'error')
+        if len(password) < 8:
+            flash('Password should have more than 8 characters', category='error')
             return redirect(url_for('register'))
         
-        if re.fullmatch(regex_password, form_password) == None:
-            flash('Password no Match!', category = 'error')
+        if re.fullmatch(regex_password, password) == None:
+            flash('Password no Match!', category='error')
             return redirect(url_for('register'))
             
-        hashed = generate_password_hash(form_password)
+        hashed = generate_password_hash(password)
 
-        user = Register(
-                        nickname=form_nickname,
-                        email=form_email, 
-                        password=hashed
-                        )
+        user = User(
+                    nickname=nickname,
+                    email=email, 
+                    password=hashed
+                    )
 
         try:
             db.session.add(user)
-            send_email(form_email)
+            send_email(email)
             db.session.commit()
             return redirect(url_for('login'))
         except:
