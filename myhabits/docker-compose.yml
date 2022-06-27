@@ -13,6 +13,8 @@ services:
         POSTGRES_DB: flask_db
         POSTGRES_USER: zhenya
         POSTGRES_PASSWORD: '`b{5:P3kUv5LdJF.'
+      ports:
+        - 5432:5432
   myhabits:
       build: .
       environment:
