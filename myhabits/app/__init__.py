@@ -1,7 +1,7 @@
 import os
 from flask import Flask
-from connector import PostgreConnector
 from flask_sqlalchemy import SQLAlchemy
+from app.db.connector import PostgreConnector
 
 
 # def create_app():

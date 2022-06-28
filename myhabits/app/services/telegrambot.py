@@ -2,14 +2,13 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import os
-from __init__ import db
-from models import Task, Habit
+from app import db
+from app.models import Task, Habit, User
 
 from flask_login import current_user
 
 bot = Bot(os.getenv('TOKEN'))
 dp = Dispatcher(bot)
-from models import User
 
 @dp.message_handler()
 async def echo_send(message : types.message):

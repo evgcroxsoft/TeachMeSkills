@@ -1,15 +1,15 @@
-from datetime import datetime
+import datetime
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from sqlalchemy.sql import func
-from __init__ import app, db
-from models import Task, Habit, Statistic
+from app import app, db
+from app.models import Task, Habit, Statistic
 
 
 @app.route('/profile', methods=('GET','POST'))
 @login_required
 def profile():
-    tasks = db.session.query(Task, Habit).filter_by(register_id=current_user.id).join(Habit).all()
+    tasks = db.session.query(Task, Habit).filter_by(user_id=current_user.id).join(Habit).all()
     date_now = datetime.date.today()
     weekday_now = datetime.datetime.today().strftime('%A')
     ids = []
@@ -31,10 +31,9 @@ def profile():
                             statistic_data = Statistic(
                                     weekdays = weekday_now,
                                     task_id = task.id,
-                                    register_id = current_user.id,
+                                    user_id = current_user.id,
                                     status = 'in process'
                                     )
-                            print(static,task.id, current_user.id)
                             try:
                                 db.session.add(statistic_data)
                                 db.session.commit()

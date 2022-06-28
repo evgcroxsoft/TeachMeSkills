@@ -2,9 +2,8 @@ from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
-from __init__ import db
-from datetime import datetime
-import datetime
+from app import db
+from app.services.utils import date_now
 
 class User(db.Model, UserMixin):
     id = db.Column(UUID(as_uuid=True), unique=True, primary_key=True, default=uuid.uuid4)
@@ -20,14 +19,14 @@ class User(db.Model, UserMixin):
     avatar = db.Column(db.LargeBinary, nullable=True)
     gender = db.Column(db.String(10), nullable=True)
     info = db.Column(db.Text, nullable=True)
-    created = db.Column(db.Date, default=datetime.date.today())
+    created = db.Column(db.Date, default=date_now())
 
 class Habit(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     name = db.Column(db.String(150), nullable=True)
     description = db.Column(db.Text, nullable=True)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(User.id), nullable=False)
-    created = db.Column(db.Date, default=datetime.date.today())
+    created = db.Column(db.Date, default=date_now())
 
 # class Log(db.Model):
 #     id = db.Column(db.Integer, unique=True, primary_key=True)
@@ -52,10 +51,11 @@ class Task(db.Model):
     pause_period = db.Column(db.Date, nullable=True)
     weekdays = db.Column(db.PickleType, nullable=True)
     life = db.Column(db.Integer, default=3, nullable=True)
+    remain = db.Column(db.Integer, default=0, nullable=True)
     total_lifes = db.Column(db.Integer, default=3, nullable=True)
     habit_id = db.Column(db.Integer, db.ForeignKey(Habit.id), nullable=False)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(User.id), nullable=False)
-    created = db.Column(db.Date, default=datetime.date.today())
+    created = db.Column(db.Date, default=date_now())
 
 class Statistic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -64,5 +64,4 @@ class Statistic(db.Model):
     status = db.Column(db.String(10), nullable=True)
     task_id = db.Column(db.Integer, db.ForeignKey(Task.id), nullable=False)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(User.id), nullable=False)
-    created = db.Column(db.Date, default=datetime.date.today())
-
+    created = db.Column(db.Date, default=date_now())

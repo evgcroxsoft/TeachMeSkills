@@ -1,8 +1,8 @@
 # https://pythonhosted.org/Flask-Mail/
 import os
-from __init__ import app
 from flask_mail import Mail, Message
 from flask import flash 
+from app import app
 
 app.config['TESTING'] = False
 app.config['MAIL_SERVER'] = os.environ['MAIL_SERVER']

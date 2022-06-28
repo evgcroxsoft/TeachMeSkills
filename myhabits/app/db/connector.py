@@ -23,4 +23,5 @@ credentials =  PostgreConnector(
     POSTGRES_URL= PostgreConnector.get_env_variable("POSTGRES_URL"),
     POSTGRES_DB= PostgreConnector.get_env_variable("POSTGRES_DB")
 )
+
 DB_path = PostgreConnector.path_to_PostgreSQL()

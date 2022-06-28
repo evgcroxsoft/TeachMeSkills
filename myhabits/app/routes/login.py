@@ -1,8 +1,8 @@
 from flask import request, flash, redirect, url_for, render_template
 from flask_login import current_user, login_user
 from werkzeug.security import check_password_hash
-from __init__ import app
-from models import User
+from app import app
+from app.models import User
 
 @app.route('/login', methods=('GET', 'POST'))
 def login():
