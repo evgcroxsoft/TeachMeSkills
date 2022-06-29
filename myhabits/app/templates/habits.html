@@ -44,7 +44,7 @@
               </button> </a></br>
 
 
-              {% if current_user.email == 'admin@admin.com' or current_user.id == habit.register_id%}
+              {% if current_user.email == 'admin@admin.com' or current_user.id == habit.user_id%}
               <a href="/profile/habits/edit/{{habit.name}}/{{habit.id}}" type="button" id={{habit.id}} method="delete" class="button">Edit</a> 
               /  
               <a href="/profile/habits/delete/{{habit.name}}/{{habit.id}}" type="button" id={{habit.id}} method="delete" class="button">Delete</a>
