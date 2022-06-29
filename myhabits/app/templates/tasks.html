@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% block content %}
+{{ super() }}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+      <li class="breadcrumb-item"><a href="/profile/habits">Habits</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Tasks</li>
+    </ol>
+    <hr>
+<h2>{% block title %} Tasks{% endblock %}</h2>
+<br>
+{% for cat, msg in get_flashed_messages(true) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+
+{% for task, habit in tasks %}
+{% if current_user.email == 'admin@admin.com' or current_user.id == task.user_id%}
+<form  method="post" enctype="multipart/form-data"
+<div class="container"> 
+ <div class="row">
+  <div class="col-10">
+    <div class="card border-success mb-3 " style="max-width: 70rem;">
+        <div class="card-header"> <a href="/profile/habits/tasks/edit/{{habit.name}}/{{task.id}}" type="button" id={{task.id}} method="delete" class="button">Edit</a> / <a href="/profile/habits/tasks/delete/{{habit.name}}/{{task.id}}" type="button" id={{task.id}} method="delete" class="button">Delete</a></div>
+          <div class="card-body">My Habit:
+            <h4 class="card-title">{{habit.name}}</h4>
+              <h5 class="card-title"> {{habit.description}}</h5>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{100/task.wish_period*task.remain}}%">{{task.remain}} days from {{task.wish_period}}</div>
+              </div>
+                <p class="card-text">Created date: <b>{{task.created}}</b>  <br>Start date:<b>{{task.start_period}}</b><br> Wish period: <b>{{task.wish_period}} days</b><br>Lifes:<b> {{task.total_lifes}} days</b></p>
+                Action days: <b>{{', '.join(task.weekdays)}}</b>
+                
+          </div>
+    </div>
+  </div>
+ </div>
+ {% endif %}
+ {%endfor%}
+
+</div>
+
+
+</form>
+
+     
+        
+{% endblock%}

@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+{% block content %}
+{{ super() }}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/home">Home</a></li>
+      <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+      <li class="breadcrumb-item"><a href="/profile/habits">Habits</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Edit Habit</li>
+    </ol>
+    <hr>
+  </nav>
+<h2>{% block title %} Edit Habit {% endblock %}</h2>
+<br>
+{% for cat, msg in get_flashed_messages(true) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="container">
+    <!-- Content here -->
+
+
+
+    
+<form method="post" enctype="multipart/form-data"
+<p><label>Habit name: </label><input type="text" name="form_name" value="" placeholder="Brush my teath" required
+    <label for="Description">Description</label>
+    <br>
+    <textarea name="form_description"
+              placeholder="Please write a few words about your Event"
+              rows="5"
+              cols="60"
+              ></textarea>
+    </p>
+     
+<input type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" value="Save Habit"><p>
+</div>
+    </tr>
+
+</table>
+{% endblock%}

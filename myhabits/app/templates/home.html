@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+{% block content %}
+{{ super() }}
+<img src="{{url_for('static', filename='habits.jpg')}}" class="center-block"  alt="Responsive image">
+<!-- <img src="{{url_for('static', filename='habits.jpg')}}" align="small" width="1200" height="345"/><br> -->
+
+<h3>Давай мы научимся с тобой хорошим привычкам:<br></h3>
+    <hr>
+
+    Я стараюсь => у меня получается => есть приятный мне результат => я стараюсь…<br>
+    <p>Любое размыкание этой цепи ведет к тому, что мотивация не работает.</p>
+    
+    <li>1. Чистить зубы утром и вечером;</li>
+    <li> 2. Делать зарядку;</li>
+    <li> 3. Просыпаться утром во время;</li>
+    <li> 4. Ложиться спать во время;</li>
+    <li>5. Кушать еду по расписанию;</li>
+    <li>6. Есть полезную еду;</li>
+    <li>7. Не есть сладкое.</li>
+
+{% for cat, msg in get_flashed_messages(true) %}
+    <div>
+    {% endfor %}
+    {% for registered in Register %}
+
+        <div class='event'>
+            <h6><i><p>Added {{ registered.date_added }}</p></i></h6> Users<h3>{{ registered.email }} 
+                {{ registered.password }}</h3>
+                <h1>{{name}}</h1>
+
+        </div>
+        
+    {% endfor %}
+
+{% endblock %}
