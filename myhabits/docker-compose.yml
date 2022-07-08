@@ -1,0 +1,34 @@
+version: '3'
+
+# volumes:
+#   postgres_data:
+#       driver: local
+
+services:
+  postgres:
+      image: postgres:12.11
+      # volumes:
+      #   - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: flask_db
+        POSTGRES_USER: zhenya
+        POSTGRES_PASSWORD: '`b{5:P3kUv5LdJF.'
+      ports:
+        - 5432:5432
+  myhabits:
+      build: .
+      environment:
+        POSTGRES_URL: postgres
+        POSTGRES_USER: zhenya
+        POSTGRES_PW: '`b{5:P3kUv5LdJF.'
+        POSTGRES_DB: flask_db
+        FLASK_DEBUG: 1
+        FLASK_APP: runner
+        MAIL_SERVER: mail.adm.tools
+        MAIL_USERNAME: myhabits@croxsoft.com
+        MAIL_PASSWORD: '2-p-6G(aRUy6'
+        TOKEN: 5577527484:AAEzw0TQlv7PzaWbdlluJ9t5_aa7sFqyXMM
+      ports:
+        - 5000:5000
+      depends_on:
+        - postgres

@@ -49,5 +49,5 @@ class Database():
             flash('Some problem with deleting, please try again!')
             return render_template(url_except)
 
-Database.createdb_command()
-# Database.resetdb_command()
+# Database.createdb_command()
+Database.resetdb_command()
