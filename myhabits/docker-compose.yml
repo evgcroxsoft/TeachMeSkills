@@ -1,14 +1,14 @@
 version: '3'
 
-# volumes:
-#   postgres_data:
-#       driver: local
+volumes:
+  postgres_data:
+      driver: local
 
 services:
   postgres:
-      image: postgres:12.11
-      # volumes:
-      #   - postgres_data:/var/lib/postgresql/data
+      image: postgres:14.4
+      volumes:
+        - postgres_data:/var/lib/postgresql/datal
       environment:
         POSTGRES_DB: flask_db
         POSTGRES_USER: zhenya

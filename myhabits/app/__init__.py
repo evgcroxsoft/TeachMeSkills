@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from app.db.connector import PostgreConnector
+from app.db_myhabits.connector import PostgreConnector
 # from celery import Celery
 
 
@@ -12,7 +12,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DB_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # silence the deprecation warning
 app.config['SECRET_KEY'] = os.urandom(20).hex()
 db = SQLAlchemy(app)
-
 
 # def make_celery(app):
 #     celery = Celery(app.import_name)

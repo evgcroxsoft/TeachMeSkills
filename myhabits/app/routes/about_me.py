@@ -1,7 +1,7 @@
 from flask import render_template, request
 from flask_login import current_user, login_required
 from app import app
-from app.db.database import Database
+from app.db_myhabits.database import Crud
 from app.models import User
 
 @app.route('/profile/about_me', methods=('GET','POST'))
@@ -20,6 +20,6 @@ def about_me():
         user.gender = request.form['gender']
         user.my_info = request.form['my_info']
         
-        Database.add_in_db('profile', 'about_me', 'about_me')
+        Crud.add_in_db('profile', 'about_me', 'about_me')
         
     return render_template('about_me.html')

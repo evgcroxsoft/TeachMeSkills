@@ -2,9 +2,9 @@ from flask import render_template, request
 from flask_login import current_user, login_required
 from app import app, db
 from app.models import User, Habit
-from app.db.database import Database
+from app.db_myhabits.database import Crud
 from flask import render_template
-from flask import flash, redirect, render_template, url_for
+from flask import redirect, render_template, url_for
 
 @app.route('/profile/habits', methods=('GET','POST'))
 @login_required
@@ -16,7 +16,7 @@ def habits():
                     user_id=current_user.id 
                     )
         table, redirect_url_success, redirect_url_except = habit, 'habits', 'habits'
-        Database.add_in_db(table, redirect_url_success, redirect_url_except)
+        Crud.add_in_db(table, redirect_url_success, redirect_url_except)
 
         redirect(url_for(redirect_url_success))
         print(url_for(redirect_url_success))
@@ -31,7 +31,7 @@ def delete_habit(name,id):
     if id and current_user.id == habit.user_id or current_user.email == 'admin@admin.com':
         
         table, redirect_url_success, redirect_url_except = habit, 'habits', 'habits'
-        Database.delete_in_db(table, redirect_url_success, redirect_url_except)
+        Crud.delete_in_db(table, redirect_url_success, redirect_url_except)
 
     return render_template('habits.html')
 
@@ -44,7 +44,7 @@ def update_habit(name,id):
         habit.description = request.form['form_description']
         
         redirect_url_success, redirect_url_except = 'habits', 'habits'
-        Database.update_in_db(redirect_url_success, redirect_url_except)
+        Crud.update_in_db(redirect_url_success, redirect_url_except)
         
     return render_template('habits_edit.html')
 

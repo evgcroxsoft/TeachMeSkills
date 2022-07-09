@@ -102,3 +102,6 @@ python3 -m pip install --upgrade pip "update PIP "
 sudo ss -lptn 'sport = :5432' "Show port 5432 in use"
 sudo kill <pid> "delete process using"
 pip install python-dotenv
+
+
+psql -U zhenya -d flask_db

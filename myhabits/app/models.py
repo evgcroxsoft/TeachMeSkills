@@ -1,9 +1,11 @@
 from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy_utils import create_database, database_exists, drop_database
 import uuid
-from app import db
+from app import db, DB_path
 from app.services.utils import date_now
+
 
 class User(db.Model, UserMixin):
     id = db.Column(UUID(as_uuid=True), unique=True, primary_key=True, default=uuid.uuid4)
@@ -65,3 +67,22 @@ class Statistic(db.Model):
     task_id = db.Column(db.Integer, db.ForeignKey(Task.id), nullable=False)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(User.id), nullable=False)
     created = db.Column(db.Date, default=date_now())
+
+class Database():
+    def createdb_command():
+        '''Check and creates the database + tables.'''
+        if not database_exists(DB_path):
+            print('Creating database.')
+            create_database(DB_path)
+            db.create_all()
+
+    def resetdb_command():
+        '''Destroys and creates the database + tables.'''
+        if database_exists(DB_path):
+            print('Deleting database.')
+            drop_database(DB_path)
+            Database.createdb_command()
+            print('Shiny!')
+
+Database.createdb_command()
+# Database.resetdb_command()
