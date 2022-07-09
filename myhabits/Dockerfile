@@ -1,8 +1,6 @@
 FROM python:3.8.10
 
-# RUN adduser python
-# USER python
-# WORKDIR /habits
+WORKDIR /habits
 COPY . .
 
 RUN pip3 install --upgrade pip

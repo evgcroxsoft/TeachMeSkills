@@ -68,13 +68,17 @@ class Statistic(db.Model):
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(User.id), nullable=False)
     created = db.Column(db.Date, default=date_now())
 
+db.create_all()
 class Database():
     def createdb_command():
         '''Check and creates the database + tables.'''
-        if not database_exists(DB_path):
+        if database_exists(DB_path) == False:
             print('Creating database.')
             create_database(DB_path)
             db.create_all()
+        else:
+            if User == False:
+                db.create_all()
 
     def resetdb_command():
         '''Destroys and creates the database + tables.'''
