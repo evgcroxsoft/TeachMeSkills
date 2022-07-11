@@ -81,8 +81,10 @@ pen:
 Важно понимать что 1 отсутп ==2 пробела. В Формате YAML отступы важны.
 
 Все необходимые команды создаються и запускаются одной командой, который читает все из файла YAML
-sudo docker compose up "Запускает все контейнеры"
-sudo docker compose down "Останавливает все запущенные контейнеры" 
+sudo docker-compose up "Запускает все контейнеры"
+sudo docker-compose down "Останавливает все запущенные контейнеры" 
+sudo docker-compose -f docker-compose.yml up -d --build
+
 Преимущества Docker Compose:
     автоматическое создание необходимых образов на основании Dockerfile каждого приложения
     Автоматическое создание изолированной сети внутри Docker Compose. Это нужно для того, чтоб контейнер,
@@ -105,3 +107,6 @@ pip install python-dotenv
 
 
 psql -U zhenya -d flask_db
+
+sudo service postgresql start "запуск постгресс"
+sudo service postgresql stop "стоп постгрес"

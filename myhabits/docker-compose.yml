@@ -8,13 +8,13 @@ services:
   postgres:
       image: postgres:14.4
       volumes:
-        - postgres_data:/var/lib/postgresql/datal
-      # environment:
-      #   POSTGRES_DB: flask_db
-      #   POSTGRES_USER: zhenya
-      #   POSTGRES_PASSWORD: '`b{5:P3kUv5LdJF.'
-      # ports:
-      #   - 5432:5432
+        - postgres_data:/var/lib/postgresql
+      environment:
+        POSTGRES_DB: flask_db
+        POSTGRES_USER: zhenya
+        POSTGRES_PASSWORD: '`b{5:P3kUv5LdJF.'
+      ports:
+        - 5432:5432
   myhabits:
       build: .
       environment:

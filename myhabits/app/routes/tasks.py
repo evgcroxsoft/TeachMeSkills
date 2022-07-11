@@ -75,7 +75,7 @@ def tasks_edit(name,id):
         wish = task.wish_period
         start = task.start_period
 
-    if request.method == 'POST'and current_user.id == task.register_id or current_user.email == 'admin@admin.com':
+    if request.method == 'POST'and current_user.id == task.user_id or current_user.email == 'admin@admin.com':
         weekdays = (request.form['weekday-mon'],
                     request.form['weekday-tue'],
                     request.form['weekday-wed'],

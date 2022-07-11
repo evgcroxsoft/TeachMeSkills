@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask_login import UserMixin
+from sqlalchemy import create_engine, inspect
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy_utils import create_database, database_exists, drop_database
 import uuid
@@ -72,11 +73,18 @@ class Statistic(db.Model):
 class Database():
     def createdb_command():
         '''Check and creates the database + tables.'''
-        if database_exists(DB_path) == False:
+        if not database_exists(DB_path):
             print('Creating database.')
             create_database(DB_path)
             db.create_all()
+        else:
+            engine = create_engine(DB_path)
+            inspector = inspect(engine)
 
+            if not inspector.has_table('user'):
+                print('Creating tables.')
+                db.create_all()
+            
     def resetdb_command():
         '''Destroys and creates the database + tables.'''
         if database_exists(DB_path):
