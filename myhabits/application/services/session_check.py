@@ -1,4 +1,4 @@
-import app
+from application import app
 import datetime
 from flask import session
 

@@ -4,8 +4,8 @@ from sqlalchemy import create_engine, inspect
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy_utils import create_database, database_exists, drop_database
 import uuid
-from app import db, DB_path
-from app.services.utils import date_now
+from application import db, DB_path
+from application.services.utils import date_now
 
 
 class User(db.Model, UserMixin):

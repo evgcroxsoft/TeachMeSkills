@@ -2,8 +2,8 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import os
-from app import db
-from app.models import Task, Habit, User
+from application import db
+from application.models import Task, Habit, User
 
 from flask_login import current_user
 

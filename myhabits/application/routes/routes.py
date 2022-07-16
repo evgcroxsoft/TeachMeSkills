@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, url_for
 from flask_login import  logout_user
-from app import app
-from app.models import User
+from application import app
+from application.models import User
 
 @app.route('/')
 def index():

@@ -1,9 +1,9 @@
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from sqlalchemy import func
-from app import app, db
-from app.models import Habit, Task
-from app.services.utils import date_now
+from application import app, db
+from application.models import Habit, Task
+from application.services.utils import date_now
 
 
 @app.route('/profile/habits/tasks', methods=('GET','POST'))

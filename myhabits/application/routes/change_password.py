@@ -1,9 +1,9 @@
 import re
 from flask import flash, redirect, render_template, request, url_for
-from app import db, app
-from app.models import User
-from app.services.send_email import send_email
-from app.services.session_check import session_check
+from application import db, app
+from application.models import User
+from application.services.send_email import send_email
+from application.services.session_check import session_check
 from werkzeug.security import generate_password_hash
 
 @app.route('/change_password/<uuid:id>', methods=('GET', 'POST'))

@@ -1,8 +1,8 @@
 from flask import render_template, request
 from flask_login import current_user, login_required
-from app import app, db
-from app.models import User, Habit
-from app.db_myhabits.database import Crud
+from application import app, db
+from application.models import User, Habit
+from application.db_myhabits.database import Crud
 from flask import render_template
 from flask import redirect, render_template, url_for
 

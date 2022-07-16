@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, flash, url_for
-from app import app
-from app.services.send_email import forget_send_email
-from app.models import User
+from application import app
+from application.services.send_email import forget_send_email
+from application.models import User
 
 @app.route('/forget_password', methods=('GET', 'POST'))
 def forget_password():

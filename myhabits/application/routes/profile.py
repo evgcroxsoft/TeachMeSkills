@@ -2,8 +2,8 @@ import datetime
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from sqlalchemy.sql import func
-from app import app, db
-from app.models import Task, Habit, Statistic
+from application import app, db
+from application.models import Task, Habit, Statistic
 
 
 @app.route('/profile', methods=('GET','POST'))

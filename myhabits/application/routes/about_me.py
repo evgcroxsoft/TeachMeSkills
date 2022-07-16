@@ -1,8 +1,8 @@
 from flask import render_template, request
 from flask_login import current_user, login_required
-from app import app
-from app.db_myhabits.database import Crud
-from app.models import User
+from application import app
+from application.db_myhabits.database import Crud
+from application.models import User
 
 @app.route('/profile/about_me', methods=('GET','POST'))
 @login_required

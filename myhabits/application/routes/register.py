@@ -1,9 +1,9 @@
 from flask import request, flash, redirect, url_for, render_template
 import re
 from werkzeug.security import generate_password_hash
-from app import db, app, constant
-from app.models import User
-from app.services.send_email import send_email
+from application import db, app, constant
+from application.models import User
+from application.services.send_email import send_email
 
 
 @app.route('/register', methods=('GET', 'POST'))
@@ -48,7 +48,7 @@ def register():
                     
         try:
             db.session.add(user)
-            send_email(email)
+            send_email.delay(email)
             db.session.commit()
             return redirect(url_for('login'))
         except:

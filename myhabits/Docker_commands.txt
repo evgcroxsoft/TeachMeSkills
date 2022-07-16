@@ -1,12 +1,19 @@
 '''Установка Docker на ubuntu'''
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-ru
 sudo apt update
+
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
 sudo apt update
+
 apt-cache policy docker-ce
+
 sudo apt install docker-ce
+
 sudo systemctl status docker
 
 
@@ -110,3 +117,24 @@ psql -U zhenya -d flask_db
 
 sudo service postgresql start "запуск постгресс"
 sudo service postgresql stop "стоп постгрес"
+
+sudo apt-get --purge remove postgresql\* "Удалить постгресс с убунту"
+
+
+Arguments Used:
+
+    -A is short for --app it is used to specify the application the worker will be working with.
+    -n is short for --hostname it is used to specify a name to the worker.
+    -P is short for --pool it is used to specify the type of pool, types of workers are discussed below.
+    -l is short for --loglevel it is used to specify the log level of our worker.
+
+You can also use -D which is short for --detach to run workers in the background.
+
+
+ps auxww | awk '/celery(.*)worker/ {print $2}' | xargs kill -9 "Kill all running Celery workers:"
+
+Task Celery:
+#(foo) python@python-RV413-RV513:~/TeachMeSkills/myhabits$ celery -A task_celery worker --loglevel=INFO
+1.Создаем обязательно
+celery -A task_celery worker --loglevel=INFO
+celery -A task_celery beat "run beat celery)"

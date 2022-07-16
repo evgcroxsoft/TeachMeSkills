@@ -2,7 +2,8 @@
 import os
 from flask_mail import Mail, Message
 from flask import flash 
-from app import app
+from application import app
+from application import celery
 
 app.config['TESTING'] = False
 app.config['MAIL_SERVER'] = os.environ['MAIL_SERVER']

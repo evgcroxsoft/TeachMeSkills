@@ -1,4 +1,6 @@
-# from celery import Celery
+'''https://www.vultr.com/docs/asynchronous-task-queueing-in-python-using-celery/'''
+
+from celery import Celery
 
 # def make_celery(app):
 #     celery = Celery(app.import_name)
@@ -11,3 +13,4 @@
 
 #     celery.Task = ContextTask
 #     return celery
+

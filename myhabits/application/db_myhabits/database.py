@@ -1,5 +1,5 @@
 from flask import flash, redirect, render_template, url_for
-from app import DB_path, db
+from application import DB_path, db
 
 class Crud():
     def add_in_db(value, url_success, url_except):
