@@ -1,0 +1,140 @@
+'''Установка Docker на ubuntu'''
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-ru
+sudo apt update
+
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+sudo apt update
+
+apt-cache policy docker-ce
+
+sudo apt install docker-ce
+
+sudo systemctl status docker
+
+
+sudo apt-get purge -y docker-engine docker docker.io docker-ce docker-ce-cli "Remove Docker"
+
+'''Запуск и работа с Docker'''
+https://www.youtube.com/watch?v=_uZQtRyF6Eg&t=9924s
+sudo docker ps "показывает активные контейнеры"
+sudo docker ps -a "показывает активные и не актвиные контейнеры"
+sudo docker ps -l "показывает последний созданный контейнер"
+sudo docker rm <b731e3a79a26> "Удаляет контейнер"
+sudo docker container prune "Удаляет все остановленные контейнеры"
+sudo docker container inspect <b731e3a79a26> "Вы увидите все детали данного контейнера"
+sudo docker container inspect <b731e3a79a26> | grep IPAddress "Айпи адрес контейнера"
+sudo docker stop <b731e3a79a26> "Останавливает контейнер"
+sudo docker exec -it <b731e3a79a26> <bash> "Запуск еще одного процесса в контейнере запущенном, например bash"
+sudo docker images "отображение всех образов"
+sudo docker image rm <idimages> "удаление образов"
+sudo docker rmi -f <idimages> "Удаление образа, на который ссылаются разные репозитории(с одни и тем же айдишником"
+sudo docker search <redis> "поиск доступных на Docker Hub образов"
+sudo docker run <redis> "просто запуск приложения"
+sudo docker run -d <redis> "запуск в фоновом режиме"
+sudo docker run -d --name <my_super_puper_redis> <redis> "создаем контейнер в фоновом режиме, но со своим именем"
+sudo docker run -d -p <8080:80> <nginx> "Меппинг портов - проброс портов первый это реальный порт, второй порт контейнера" 
+sudo docker run -d -v ${PWD}:/usr/share/nginx/html - "Меппинг томов"
+sudo docker container inspect <b731e3a79a26> | grep Mounts "Меппинг томов вывод и проверка привязанных папок с копьютера на контейнер" 
+sudo docker run -it <redis> "запуск приложения внутри контейнер
+sudo docker run -it --rm <redis> "автоматическое удаление контейнера после того как он будет или остановлен или выполнены все процессы"
+\ "обратный слеш дает возможность переносить строку на слудеющую строку" пример:
+    sudo docker run \
+        --name my_nginx \
+        - v ${PWD}:/usr/share/nginx/html \
+        -p 8888:80 \ 
+        -d \
+        -rm \
+        nginx
+hostname -i "show IP adress"
+
+'''Создание собственного образа Docker'''
+Dockerfile - нужно добавлять в корень проекта разработки
+
+FROM python:alpine - "означет начальный образ и самая минимальная версия"
+WORKDIR /app - "создать папку /app"
+COPY . . - "копирование файлов первая точка откуда, вторая точка куда"
+CMD ("python", "runner.py")
+
+sudo docker build . "Создание нового образа выбор имени и версии автоматом"
+sudo docker build . -t my_habits:ver.1 "Создание нового образа c добавлением имени и версиию тег ver.1 можно не указывать, тогда автоматически присвоит значение lastest"
+
+
+'''Docker Compose'''
+docker-compose.yml
+императивный подход - каждый раз мы давали docker инструкцию определенного действия
+декларативный подход - в декларативном подходе вы подписываете желаемый результат \
+я хочу получить столько-то контейнеров, такое то приложение должно быть, такие вот порты
+должны быть открыты... при необходимости, создать образ для какого нибудь контейнера... . 
+Другими словами Вы создаете инструкцию более высокого уровня.И с помощью этих инструкций Вы описываете
+конкретную цель.
+Формат YAML файла:
+1. Списки (используем черточки):
+fruits:
+  - banana
+  - apple
+  - orange
+2. Словари (используем двоеточие):
+pen:
+  color:yellow
+  model:
+    type: pen
+    material: plastic
+  price: 2
+Важно понимать что 1 отсутп ==2 пробела. В Формате YAML отступы важны.
+
+Все необходимые команды создаються и запускаются одной командой, который читает все из файла YAML
+sudo docker-compose up "Запускает все контейнеры"
+sudo docker-compose down "Останавливает все запущенные контейнеры" 
+sudo docker-compose -f docker-compose.yml up -d --build
+
+Преимущества Docker Compose:
+    автоматическое создание необходимых образов на основании Dockerfile каждого приложения
+    Автоматическое создание изолированной сети внутри Docker Compose. Это нужно для того, чтоб контейнер,
+    из одной сети могли взаимодействовать друг с другом.
+    Благодаря DNS возможно взаимодействие между контейнерами, используя имена сервисов.
+
+services:
+  app:
+    build: ./app -"сначала создасться из Dockerfile образ, а потом только создасться контейнер"
+  database:
+    image: postgres
+
+
+sudo apt install docker-compose "Установка docker compose"
+
+python3 -m pip install --upgrade pip "update PIP "
+sudo ss -lptn 'sport = :5432' "Show port 5432 in use"
+sudo kill <pid> "delete process using"
+pip install python-dotenv
+
+
+psql -U zhenya -d flask_db
+
+sudo service postgresql start "запуск постгресс"
+sudo service postgresql stop "стоп постгрес"
+
+sudo apt-get --purge remove postgresql\* "Удалить постгресс с убунту"
+
+
+Arguments Used:
+
+    -A is short for --app it is used to specify the application the worker will be working with.
+    -n is short for --hostname it is used to specify a name to the worker.
+    -P is short for --pool it is used to specify the type of pool, types of workers are discussed below.
+    -l is short for --loglevel it is used to specify the log level of our worker.
+
+You can also use -D which is short for --detach to run workers in the background.
+
+
+ps auxww | awk '/celery(.*)worker/ {print $2}' | xargs kill -9 "Kill all running Celery workers:"
+
+Task Celery:
+#(foo) python@python-RV413-RV513:~/TeachMeSkills/myhabits$ celery -A task_celery worker --loglevel=INFO
+1.Создаем обязательно
+celery -A task_celery worker --loglevel=INFO
+celery -A task_celery beat "run beat celery)"
