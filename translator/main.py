@@ -5,13 +5,13 @@ from aiogram.utils import executor
 
 
 URL_AUTH = 'https://developers.lingvolive.com/api/v1.1/authenticate'
-HEADERS_PARAMETERES = {'Authorization': 'Basic ZjM0OGE3MTUtMWM1Ny00OGE0LThkOTQtNDllZTRjNWQxNTY2OjJiZWFlY2ViOWRiZDQ4OTI5MTdkYTI3MmFjNWMwYWFk'}
+HEADERS_PARAMETERES = {'Authorization': ''}
 
 URL_TRANSL = 'https://developers.lingvolive.com/api/v1/Minicard'
 ENG, RUS = 1033, 1049
 
 
-bot = Bot('5444555318:AAGdYpeEXONEgCP-qaep9yE95T0lAPAXGls')
+bot = Bot('')
 dp = Dispatcher(bot)
 
 # check cyrillic alphabet
