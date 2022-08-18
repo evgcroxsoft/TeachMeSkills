@@ -6,28 +6,28 @@ from datetime import date
 
 class TenantBaseSchema(BaseModel):
     
-    email = str
-    first_name = str
-    last_name = str
+    email : str
+    first_name : str
+    last_name : str
 
 class TenantCreateSchema(TenantBaseSchema):
-    id = uuid
-    hashed_password: str
-    created_at: date
+    id : int
+    hashed_password : str
+    created_at : date
 
 class TenantUpdateSchema(TenantCreateSchema):
-    updated_at: date
-    is_active: bool
+    updated_at : date
+    is_active : bool
 
 class TenantRetrieveSchema(TenantCreateSchema):
-    id : uuid
-    email = str
-    first_name = str
-    last_name = str
-    created_at: date
-    updated_at: date
-    is_active: bool
+    id : int
+    email : str
+    first_name : str
+    last_name : str
+    created_at : date
+    updated_at : date
+    is_active : bool
     # appartments: List[Appartment] = []
 
-    class Config:
+    class Config :
         orm_mode = True

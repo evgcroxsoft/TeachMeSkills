@@ -6,12 +6,12 @@ from datetime import date
 
 class LandlordBaseSchema(BaseModel):
     
-    email = str
-    first_name = str
-    last_name = str
+    email : str
+    first_name : str
+    last_name : str
 
 class LandlordCreateSchema(LandlordBaseSchema):
-    id = uuid
+    id : int
     hashed_password: str
     created_at: date
 
@@ -20,10 +20,10 @@ class LandlordUpdateSchema(LandlordCreateSchema):
     is_active: bool
 
 class LandlordRetrieveSchema(LandlordCreateSchema):
-    id : uuid
-    email = str
-    first_name = str
-    last_name = str
+    id : int
+    email : str
+    first_name : str
+    last_name : str
     created_at: date
     updated_at: date
     is_active: bool

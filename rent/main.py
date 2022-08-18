@@ -12,17 +12,13 @@ from schema.appartment import AppartmentCreateSchema, AppartmentRetrieveSchema, 
 from schema.landlord import LandlordCreateSchema, LandlordRetrieveSchema, LandlordUpdateSchema
 from schema.tenant import TenantCreateSchema, TenantRetrieveSchema, TenantUpdateSchema
 
+
 app = FastAPI()
 
+# create all tables in Database
 models.Base.metadata.create_all(bind=engine)
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
+# start uvicorn with python module - easy start.
 if __name__ == "__main__":
     uvicorn.run('main:app', port=8000, host='0.0.0.0', reload=True)
 

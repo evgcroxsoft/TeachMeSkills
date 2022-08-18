@@ -1,25 +1,18 @@
-from abc import ABC
-
 import datetime
 from datetime import datetime, date
 
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Text, Date
 from sqlalchemy.orm import relationship
 
-import uuid
-from uuid import UUID
 
-from database.base import Base
-
-
-class ModelBase(ABC):
+class ModelBase():
     created_at: Column(Date, default=datetime.date)
     updated_at: Column(Date, default=datetime.date)
+    abstract__ = True
 
 
 class UserBase(ModelBase):
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
-    email = Column(String, unique=True, nullable=False)
+    id = Column(Integer, primary_key=True)
     first_name = Column(String(50))
     last_name = Column(String(100))
     hashed_password = Column(String(100), nullable=False)
@@ -43,16 +36,16 @@ class Appartment(ModelBase):
     house_number = Column(String(5))
     flat_number = Column(String(5))
     description = Column(String)
-    daily_price = Column(Integer(10))
+    daily_price = Column(Integer)
     is_available = Column(Boolean, default=True)
-    landlords_id = Column(UUID, ForeignKey("landlords.id"))
+    landlords_id = Column(Integer, ForeignKey("landlords.id"))
 
 
 class Cart(ModelBase):
     __tablename__ = "cart"
 
     appartment_id = Column(Integer, ForeignKey("item.id"))
-    tenant_id = Column(UUID, ForeignKey("tenants.id"), unique=True)
+    tenant_id = Column(Integer, ForeignKey("tenants.id"), unique=True)
 
 class Order (ModelBase):
     __tablename__ = "order"
@@ -67,7 +60,7 @@ class Feedback(ModelBase):
     __tablename__ = "feedbacks"
 
     id = Column(Integer, primary_key=True)
-    star = Column(Integer(10))
+    star = Column(Integer)
     comment = Column(Text)
 
 

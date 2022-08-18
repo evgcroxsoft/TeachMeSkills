@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from typing import List, Union
-import uuid
 from datetime import date
 
 class AppartmentBaseSchema(BaseModel):
@@ -12,8 +11,8 @@ class AppartmentBaseSchema(BaseModel):
     daily_price : int
 
 class AppartmentCreateSchema(AppartmentBaseSchema):
-    id = int
-    landlords_id = uuid
+    id : int
+    landlords_id : int
     created_at: date
 
 class AppartmentUpdateSchema(AppartmentBaseSchema):
@@ -21,8 +20,8 @@ class AppartmentUpdateSchema(AppartmentBaseSchema):
     is_active: bool
 
 class AppartmentRetrieveSchema(AppartmentBaseSchema):
-    id = int
-    landlords_id = uuid
+    id : int
+    landlords_id : int
     city : str
     street : str
     house_number : str
