@@ -5,3 +5,8 @@ greenlet == 1.1.2
 uvicorn  == 0.18.2
 sqlalchemy == 1.4.39
 psycopg2-binary == 2.9.3
+databases == 0.6.1
+sqlalchemy_utils == 0.38.3
+jose == 1.0.0
+jwt
+passlib[bcrypt]

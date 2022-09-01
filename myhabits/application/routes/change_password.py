@@ -2,7 +2,7 @@ import re
 from flask import flash, redirect, render_template, request, url_for
 from application import db, app
 from application.models import User
-from application.services.send_email import send_email
+from task_celery import send_email
 from application.services.session_check import session_check
 from werkzeug.security import generate_password_hash
 
@@ -33,7 +33,7 @@ def change_password(id):
                 user_check.password = hashed_password
                 try:
                     db.session.commit()
-                    send_email(user_check.email)
+                    send_email(user_check.email).delay()
                     return redirect(url_for('login'))
                 except Exception:
                     flash('Some problem with registration, please try again!')

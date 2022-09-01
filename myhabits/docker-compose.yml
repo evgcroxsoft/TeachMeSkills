@@ -9,11 +9,15 @@ volumes:
 services:
   postgres:
       image: postgres:14.4
-      container_name: myhabits_psql
+      container_name: myhabits_postgres
       volumes:
         - postgres_data:/var/lib/postgresql
-      env_file:
-        - application/db_myhabits/postgres.env
+      # env_file:
+      #   - application/db_myhabits/postgres.env
+      environment:
+        POSTGRES_DB: myhabits_db
+        POSTGRES_USER: yevhenii
+        POSTGRES_PASSWORD: '`b{5:P3kUv5LdJF.'
       ports:
         - 5432:5432
       restart:
@@ -30,13 +34,21 @@ services:
       container_name: myhabits_python
       volumes:
         - application_data:/home/python/TeachMeSkills/myhabits
-      env_file:
-        - app.env
+      environment:
+        POSTGRES_URL: postgres
+        POSTGRES_USER: yevhenii
+        POSTGRES_PW: '`b{5:P3kUv5LdJF.'
+        POSTGRES_DB: myhabits_db
+        FLASK_DEBUG: 1
+        FLASK_APP: ./app
+        MAIL_SERVER: mail.adm.tools
+        MAIL_USERNAME: myhabits@croxsoft.com
+        MAIL_PASSWORD: 'Myhabits@croxsoft.com123'
+        TOKEN: 5577527484:AAEzw0TQlv7PzaWbdlluJ9t5_aa7sFqyXMM
       ports:
         - 5000:5000
-      # depends_on:
-      #   - postgres
-        # - redis
+      depends_on:
+        - postgres
       restart:
         unless-stopped
   worker:
@@ -48,15 +60,26 @@ services:
       # user: nobody
       # volumes:
       #   - ./examples:/data
-      env_file:
-          - app.env
+      # env_file:
+      #     - app.env
       environment:
+        POSTGRES_URL: postgres
+        POSTGRES_USER: yevhenii
+        POSTGRES_PW: '`b{5:P3kUv5LdJF.'
+        POSTGRES_DB: myhabits_db
+        FLASK_DEBUG: 1
+        FLASK_APP: ./app
+        MAIL_SERVER: mail.adm.tools
+        MAIL_USERNAME: myhabits@croxsoft.com
+        MAIL_PASSWORD: 'Myhabits@croxsoft.com123'
+        TOKEN: 5577527484:AAEzw0TQlv7PzaWbdlluJ9t5_aa7sFqyXMM
         CELERY_BROKER_URL: redis://redis
         CELERY_RESULT_BACKEND: redis://redis
         # PYTHONPATH: /data
-      # depends_on:
-      #   - redis
-      #   - myhabits
+      depends_on:
+        - redis
+        - myhabits
+        - postgres
   flower:
       build: ./
       command: celery -A task_celery flower
@@ -64,15 +87,73 @@ services:
       # volumes:
       #   - ./examples:/data
       # working_dir: /data
-      env_file:
-        - app.env
+      # env_file:
+      #   - app.env
       ports:
         - 5555:5555
       environment:
+        POSTGRES_URL: postgres
+        POSTGRES_USER: yevhenii
+        POSTGRES_PW: '`b{5:P3kUv5LdJF.'
+        POSTGRES_DB: myhabits_db
+        FLASK_DEBUG: 1
+        FLASK_APP: ./app
+        MAIL_SERVER: mail.adm.tools
+        MAIL_USERNAME: myhabits@croxsoft.com
+        MAIL_PASSWORD: 'Myhabits@croxsoft.com123'
+        TOKEN: 5577527484:AAEzw0TQlv7PzaWbdlluJ9t5_aa7sFqyXMM
         CELERY_BROKER_URL: redis://redis
         CELERY_RESULT_BACKEND: redis://redis
       # depends_on:
       #   - worker
       #   - redis
       #   - myhabits
-    
+  celery:
+      build: ./
+      command: celery -A task_celery beat
+      container_name: myhabits_celery_beat
+      # volumes:
+      #   - ./examples:/data
+      # working_dir: /data
+      # env_file:
+      #   - app.env
+      environment:
+        POSTGRES_URL: postgres
+        POSTGRES_USER: yevhenii
+        POSTGRES_PW: '`b{5:P3kUv5LdJF.'
+        POSTGRES_DB: myhabits_db
+        FLASK_DEBUG: 1
+        FLASK_APP: ./app
+        MAIL_SERVER: mail.adm.tools
+        MAIL_USERNAME: myhabits@croxsoft.com
+        MAIL_PASSWORD: 'Myhabits@croxsoft.com123'
+        TOKEN: 5577527484:AAEzw0TQlv7PzaWbdlluJ9t5_aa7sFqyXMM
+        CELERY_BROKER_URL: redis://redis
+        CELERY_RESULT_BACKEND: redis://redis
+      depends_on:
+        - worker
+        - redis
+        - myhabits
+        - postgres
+  telegram:
+      build: ./
+      command: python3 telegrambot.py
+      container_name: telegrambot
+      # volumes:
+      #   - ./examples:/data
+      # working_dir: /data
+      # env_file:
+      #   - app.env
+      environment:
+        POSTGRES_URL: postgres
+        POSTGRES_USER: yevhenii
+        POSTGRES_PW: '`b{5:P3kUv5LdJF.'
+        POSTGRES_DB: myhabits_db
+        FLASK_DEBUG: 1
+        FLASK_APP: ./app
+        MAIL_SERVER: mail.adm.tools
+        MAIL_USERNAME: myhabits@croxsoft.com
+        MAIL_PASSWORD: 'Myhabits@croxsoft.com123'
+        TOKEN: 5577527484:AAEzw0TQlv7PzaWbdlluJ9t5_aa7sFqyXMM
+        CELERY_BROKER_URL: redis://redis
+        CELERY_RESULT_BACKEND: redis://redis

@@ -90,7 +90,7 @@ pen:
 Все необходимые команды создаються и запускаются одной командой, который читает все из файла YAML
 sudo docker-compose up "Запускает все контейнеры"
 sudo docker-compose down "Останавливает все запущенные контейнеры" 
-sudo docker-compose -f docker-compose.yml up -d --build
+sudo docker-compose -f docker-compose.yml up -d --build "Перебилд"
 
 Преимущества Docker Compose:
     автоматическое создание необходимых образов на основании Dockerfile каждого приложения

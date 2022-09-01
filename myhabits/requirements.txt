@@ -17,3 +17,4 @@ SQLAlchemy-Utils==0.38.2
 Werkzeug==2.1.2
 redis==4.3.4
 flower==1.0.0
+flask-crontab == 0.1.2

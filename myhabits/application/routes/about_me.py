@@ -20,6 +20,6 @@ def about_me():
         user.gender = request.form['gender']
         user.my_info = request.form['my_info']
         
-        Crud.add_in_db('profile', 'about_me', 'about_me')
+        Crud.update_in_db('profile', 'about_me')
         
     return render_template('about_me.html')
