@@ -1215,7 +1215,7 @@ For testing User in DB we created **test.bd** and switch it when testing from ma
 from fastapi.testclient import TestClient
 from main import app
 from database.app_db import engine, Base,sessionmaker, get_db,SessionLocal
-from sqlmodel import create_engine
+from sqlalchemy import create_engine
 from randominfo import random_password
 
 
