@@ -1201,6 +1201,11 @@ class UserService():
 #create an instance and then refer to it in the project
 user_services = UserService()
 ```
+## **Now Start Project**
+
+```bash
+python3 main.py
+```
 
 ### **CREATE - dailyrent/tests/test_main.py**
 
